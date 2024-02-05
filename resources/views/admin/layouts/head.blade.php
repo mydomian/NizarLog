@@ -14,4 +14,4 @@
 <link rel="stylesheet" href="{{ asset('/storage/vendors/base/vendor.bundle.base.css') }}">
 <link rel="stylesheet" href="{{ asset('/storage/css/style.css') }}">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-@stack('links-css')
+@stack('admin-links-css')
