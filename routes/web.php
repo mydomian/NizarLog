@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\ServiceAreaController;
 use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
 use App\Http\Controllers\Driver\DashboardController as DriverDashboardController;
 
@@ -30,6 +32,15 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/dashboard',[DashboardController::class,'dashboard'])->name('admin.dashboard');
     Route::match(['get','post'],'settings',[SettingController::class,'settings'])->name('admin.settings');
+
+
+
+    //drivers
+    Route::resource('admin-drivers',DriverController::class);
+    Route::post('/admin-drivers-status/{user}',[DriverController::class,'driverStatus'])->name('admin.drivers.status');
+    //service area
+    Route::resource('service-areas',ServiceAreaController::class);
+    Route::post('/service-areas-status/{serviceArea}',[ServiceAreaController::class,'serviceAreaStatus'])->name('admin.serviceArea.status');
 
     Route::get('admin-logout',[DashboardController::class,'logout'])->name('admin.logout');
 

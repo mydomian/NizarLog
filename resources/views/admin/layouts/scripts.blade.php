@@ -52,4 +52,4 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
   </script>
-@stack('scripts')
+@stack('admin-scripts')

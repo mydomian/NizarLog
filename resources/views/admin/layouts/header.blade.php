@@ -88,8 +88,8 @@
               </a>
               <div class="submenu">
                   <ul>
-                      <li class="nav-item"><a class="nav-link" href="">Add</a></li>
-                      <li class="nav-item"><a class="nav-link" href="">Lists</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-drivers.create') }}">Add</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-drivers.index') }}">Lists</a></li>
                   </ul>
               </div>
           </li>
@@ -102,8 +102,8 @@
             </a>
             <div class="submenu">
                 <ul>
-                    <li class="nav-item"><a class="nav-link" href="">Add</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Lists</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('service-areas.create') }}">Add</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('service-areas.index') }}">Lists</a></li>
                 </ul>
             </div>
           </li>
