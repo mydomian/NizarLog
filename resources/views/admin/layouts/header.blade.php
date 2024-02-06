@@ -59,7 +59,7 @@
                 </a>
                 <div class="submenu">
                     <ul>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Air Bill</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.create') }}">Air Bill</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Lists</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Status</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li>
@@ -70,13 +70,13 @@
             <li class="nav-item">
               <a href="" class="nav-link text-warning">
                 <i class="mdi mdi-account-key menu-icon"></i>
-                <span class="menu-title">Client</span>
+                <span class="menu-title">Agency</span>
                 <i class="menu-arrow"></i>
               </a>
               <div class="submenu">
                   <ul>
-                      <li class="nav-item"><a class="nav-link" href="">Add</a></li>
-                      <li class="nav-item"><a class="nav-link" href="">Lists</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-agencies.create') }}">Add</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-agencies.index') }}">Lists</a></li>
                   </ul>
               </div>
           </li>
@@ -110,14 +110,23 @@
 
             <li class="nav-item">
               <a href="#" class="nav-link text-warning">
-                <i class="mdi mdi-account-settings menu-icon"></i>
-                <span class="menu-title">Charge</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <span class="menu-title">Menus</span>
                 <i class="menu-arrow"></i>
               </a>
               <div class="submenu">
                   <ul>
-                      <li class="nav-item"><a class="nav-link" href="">Delivery Charge</a></li>
-                      <li class="nav-item"><a class="nav-link" href="">Payment</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-area-types.create') }}">Add Area Type</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-area-types.index') }}">Lists Area Type</a></li>
+
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-parcel-types.create') }}">Add Parcel Type</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-parcel-types.index') }}">Lists Parcel Type</a></li>
+
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-types.create') }}">Add Delivery Type</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-types.index') }}">Lists Delivery Type</a></li>
+
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-weight-types.create') }}">Add Weight Type</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-weight-types.index') }}">Lists Weight Type</a></li>
                   </ul>
               </div>
           </li>

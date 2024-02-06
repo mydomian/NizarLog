@@ -3,10 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AgencyController;
 use App\Http\Controllers\Admin\DriverController;
+use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\AreaTypeController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ParcelTypeController;
+use App\Http\Controllers\Admin\WeightTypeController;
 use App\Http\Controllers\Admin\ServiceAreaController;
+use App\Http\Controllers\Admin\DeliveryTypeController;
 use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
 use App\Http\Controllers\Driver\DashboardController as DriverDashboardController;
 
@@ -41,6 +47,28 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     //service area
     Route::resource('service-areas',ServiceAreaController::class);
     Route::post('/service-areas-status/{serviceArea}',[ServiceAreaController::class,'serviceAreaStatus'])->name('admin.serviceArea.status');
+    //agency
+    Route::resource('admin-agencies',AgencyController::class);
+    Route::post('/admin-agency-status/{user}',[AgencyController::class,'agencyStatus'])->name('admin.agencies.status');
+    //air bills
+    Route::resource('admin-air-bills',BookingController::class);
+    Route::post('admin-air-bills-status/{user}',[BookingController::class,'airBillsStatus'])->name('admin.airBills.status');
+
+    //area-types
+    Route::resource('admin-area-types',AreaTypeController::class);
+    Route::post('/admin-area-types-status/{areaType}',[AreaTypeController::class,'areaTypeStatus'])->name('admin.areaTypes.status');
+
+    //parcel-types
+    Route::resource('admin-parcel-types',ParcelTypeController::class);
+    Route::post('/admin-parcel-types-status/{parcelType}',[ParcelTypeController::class,'parcelTypeStatus'])->name('admin.parcelTypes.status');
+
+    //deliveries-types
+    Route::resource('admin-delivery-types',DeliveryTypeController::class);
+    Route::post('/admin-delivery-types-status/{deliveryType}',[DeliveryTypeController::class,'deliveryTypeStatus'])->name('admin.deliveryTypes.status');
+
+    //weight-types
+    Route::resource('admin-weight-types',WeightTypeController::class);
+    Route::post('/admin-weight-types-status/{weightType}',[WeightTypeController::class,'weightTypeStatus'])->name('admin.weightTypes.status');
 
     Route::get('admin-logout',[DashboardController::class,'logout'])->name('admin.logout');
 
