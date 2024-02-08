@@ -60,7 +60,7 @@
                 <div class="submenu">
                     <ul>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.create') }}">Air Bill</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Lists</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.index') }}">Lists</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Status</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li>
                     </ul>

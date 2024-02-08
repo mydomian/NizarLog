@@ -155,6 +155,13 @@ Air Bill Generate
                   </table>
             </div>
         </div>
+        <div class="card mt-3">
+            <h5 class="text-center mt-3 text-warning">Pickup Notice</h5>
+            <div class="card-body">
+                <strong class="text-danger">Urgent</strong> = Same day pick-up & Delivery within 8 hrs upto 9.00 pm in City.<br><br>
+                <strong class="text-danger">Regular</strong> = Next day delivery within 24 hrs in City.
+            </div>
+        </div>
       </div>
     </div>
 </div>
