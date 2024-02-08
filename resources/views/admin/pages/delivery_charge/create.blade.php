@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Weight Type Add
+Delivery Charge Add
 @endsection
 @push('admin-links-css')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -25,12 +25,28 @@ Weight Type Add
     <div class="row d-flex justify-content-center">
       <div class="col-md-8">
         <div class="card">
-        <h5 class="text-center mt-3 text-warning">Weight Type</h5>
+        <h5 class="text-center mt-3 text-warning">Delivery Charge</h5>
           <div class="card-body">
 
-            <form action="{{ route('admin-weight-types.store') }}" method="post">
+            <form action="{{ route('admin-delivery-charges.store') }}" method="post">
             @csrf
                 <div class="row">
+                  <div class="col">
+                    <select class="js-example-basic-single @error('area_type_id') is-invalid @enderror" name="area_type_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Area Type" required>
+                        <option value="">Select Area Type</option>
+                        @foreach ($areaTypes as $areaType)
+                            <option value="{{ $areaType->id }}">{{ $areaType->type }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                  <div class="col">
+                    <select class="js-example-basic-single @error('parcel_type_id') is-invalid @enderror" name="parcel_type_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Parcel Type" required>
+                        <option value="">Select Parcel Type</option>
+                        @foreach ($parcelTypes as $parcelType)
+                            <option value="{{ $parcelType->id }}">{{ $parcelType->type }}</option>
+                        @endforeach
+                    </select>
+                  </div>
                   <div class="col">
                     <select class="js-example-basic-single @error('delivery_type_id') is-invalid @enderror" name="delivery_type_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Delivery Type" required>
                         <option value="">Select Delivery Type</option>
@@ -39,11 +55,13 @@ Weight Type Add
                         @endforeach
                     </select>
                   </div>
+                </div>
+                <div class="row mt-3">
                   <div class="col">
-                    <input type="text" name="type" class="form-control border-warning @error('type') is-invalid @enderror" placeholder="Weight Type" data-toggle="tooltip" data-placement="top" title="Weight Type (KG,Pound?)">
+                    <input type="text" name="weight" class="form-control border-warning @error('weight') is-invalid @enderror" placeholder="Weight" data-toggle="tooltip" data-placement="top" title="Weight">
                   </div>
                   <div class="col">
-                    <input type="number" name="charge" class="form-control border-warning @error('charge') is-invalid @enderror" placeholder="Weight Charge" data-toggle="tooltip" data-placement="top" title="Weight Charge">
+                    <input type="number" name="delivery_charge" class="form-control border-warning @error('delivery_charge') is-invalid @enderror" placeholder="Delivery Charge" data-toggle="tooltip" data-placement="top" title="Delivery Charge">
                   </div>
                 </div>
                 <div class="row mt-2">
