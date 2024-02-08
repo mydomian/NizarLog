@@ -15,6 +15,7 @@ Delivery Type Lists
         <div class="card">
             <div class="text-center">
                 <h5 class=" mt-3 text-warning">Delivery Type Lists</h5>
+                <a href="{{ route('admin-delivery-types.index') }}" class="btn btn-sm btn-primary">Delivery Type Add</a>
             </div>
           <div class="card-body">
 

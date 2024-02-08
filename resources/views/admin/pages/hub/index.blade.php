@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Area Type Lists
+Hub Lists
 @endsection
 @push('admin-links-css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -14,38 +14,38 @@ Area Type Lists
       <div class="col-md-12">
         <div class="card">
             <div class="text-center">
-                <h5 class=" mt-3 text-warning">Area Type Lists</h5>
-                <a href="{{ route('admin-area-types.create') }}" class="btn btn-sm btn-primary">Area Type Add</a>
+                <h5 class=" mt-3 text-warning">Hub Lists</h5>
+                <a href="{{ route('admin-hubs.create') }}" class="btn btn-sm btn-primary">Hub Add</a>
             </div>
           <div class="card-body">
 
-            <div class="service-area-append">
+            <div class="service-delivery-append">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead class="bg-warning">
                         <tr>
                             <th>Id</th>
-                            <th>Type</th>
+                            <th>Hub Name</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($areaTypes as $areaType)
+                        @foreach ($hubs as $hub)
                         <tr>
-                            <td>{{ $areaType->id }}</td>
-                            <td>{{ $areaType->type ?? "-" }}</td>
-                            <td><span class="badge badge-info">{{ $areaType->status }}</span></td>
+                            <td>{{ $hub->id }}</td>
+                            <td>{{ $hub->hub_name ?? "-" }}</td>
+                            <td><span class="badge badge-info">{{ $hub->status }}</span></td>
                             <td>
-                                <a href="{{ route('admin-area-types.edit',$areaType->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="{{ route('admin-hubs.edit',$hub->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="mdi mdi-pencil-box-outline"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text sa-active-{{ $areaType->id }}" dataRoute="{{ route('admin.areaTypes.status',$areaType->id) }}" status="active" data-toggle="tooltip" data-placement="top" title="Active">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text sa-active-{{ $hub->id }}" dataRoute="{{ route('admin.hubs.status',$hub->id) }}" status="active" data-toggle="tooltip" data-placement="top" title="Active">
                                     <i class="mdi mdi-account-check"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-inactive-{{ $areaType->id }}" dataRoute="{{ route('admin.areaTypes.status',$areaType->id) }}" status="inactive" data-toggle="tooltip" data-placement="top" title="Inactive">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-inactive-{{ $hub->id }}" dataRoute="{{ route('admin.hubs.status',$hub->id) }}" status="inactive" data-toggle="tooltip" data-placement="top" title="Inactive">
                                     <i class="mdi mdi-account-off"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-suspend-{{ $areaType->id }}" dataRoute="{{ route('admin.areaTypes.status',$areaType->id) }}" status="suspend" data-toggle="tooltip" data-placement="top" title="Suspend">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-suspend-{{ $hub->id }}" dataRoute="{{ route('admin.hubs.status',$hub->id) }}" status="suspend" data-toggle="tooltip" data-placement="top" title="Suspend">
                                     <i class="mdi mdi-account-remove"></i>
                                 </a>
                             </td>
@@ -53,7 +53,7 @@ Area Type Lists
 
                             @push('admin-scripts')
                                 <script>
-                                $('.sa-active-{{ $areaType->id }}, .sa-inactive-{{ $areaType->id }}, .sa-suspend-{{ $areaType->id }}').on('click', function () {
+                                $('.sa-active-{{ $hub->id }}, .sa-inactive-{{ $hub->id }}, .sa-suspend-{{ $hub->id }}').on('click', function () {
                                     let status = $(this).attr('status');
                                     let route = $(this).attr('dataRoute');
 

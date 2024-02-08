@@ -116,17 +116,16 @@
               </a>
               <div class="submenu">
                   <ul>
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-area-types.create') }}">Add Area Type</a></li>
                       <li class="nav-item"><a class="nav-link" href="{{ route('admin-area-types.index') }}">Lists Area Type</a></li>
 
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-parcel-types.create') }}">Add Parcel Type</a></li>
                       <li class="nav-item"><a class="nav-link" href="{{ route('admin-parcel-types.index') }}">Lists Parcel Type</a></li>
 
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-types.create') }}">Add Delivery Type</a></li>
                       <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-types.index') }}">Lists Delivery Type</a></li>
 
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-weight-types.create') }}">Add Weight Type</a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-weight-types.index') }}">Lists Weight Type</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-charges.index') }}">Lists Delivery Charge</a></li>
+
+                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-hubs.index') }}">Lists Hub</a></li>
+
                   </ul>
               </div>
           </li>

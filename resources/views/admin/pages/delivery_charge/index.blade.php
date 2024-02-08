@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Parcel Type Lists
+Delivery Charge Lists
 @endsection
 @push('admin-links-css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -14,7 +14,8 @@ Parcel Type Lists
       <div class="col-md-12">
         <div class="card">
             <div class="text-center">
-                <h5 class=" mt-3 text-warning">Parcel Type Lists</h5>
+                <h5 class=" mt-3 text-warning">Delivery Charge Lists</h5>
+                <a href="{{ route('admin-delivery-charges.create') }}" class="btn btn-sm btn-primary">Delivery Charge Add</a>
             </div>
           <div class="card-body">
 
@@ -23,32 +24,36 @@ Parcel Type Lists
                     <thead class="bg-warning">
                         <tr>
                             <th>Id</th>
+                            <th>Area Type</th>
+                            <th>Parcel Type</th>
                             <th>Delivery Type</th>
-                            <th>Type</th>
-                            <th>Charge</th>
+                            <th>Weight</th>
+                            <th>Delivery Charge</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($weightTypes as $weightType)
+                        @foreach ($deliveryCharges as $deliveryCharge)
                         <tr>
-                            <td>{{ $weightType->id }}</td>
-                            <td>{{ $weightType->delivery_type->type }}</td>
-                            <td>{{ $weightType->type ?? "-" }}</td>
-                            <td>{{ $weightType->charge ?? "-" }}</td>
-                            <td><span class="badge badge-info">{{ $weightType->status }}</span></td>
+                            <td>{{ $deliveryCharge->id }}</td>
+                            <td>{{ $deliveryCharge->area_type->type }}</td>
+                            <td>{{ $deliveryCharge->parcel_type->type }}</td>
+                            <td>{{ $deliveryCharge->delivery_type->type }}</td>
+                            <td>{{ $deliveryCharge->weight ?? "-" }}</td>
+                            <td>{{ $deliveryCharge->delivery_charge ?? "-" }}</td>
+                            <td><span class="badge badge-info">{{ $deliveryCharge->status }}</span></td>
                             <td>
-                                <a href="{{ route('admin-weight-types.edit',$weightType->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="{{ route('admin-delivery-charges.edit',$deliveryCharge->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="mdi mdi-pencil-box-outline"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text sa-active-{{ $weightType->id }}" dataRoute="{{ route('admin.weightTypes.status',$weightType->id) }}" status="active" data-toggle="tooltip" data-placement="top" title="Active">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text sa-active-{{ $deliveryCharge->id }}" dataRoute="{{ route('admin.deliveryCharge.status',$deliveryCharge->id) }}" status="active" data-toggle="tooltip" data-placement="top" title="Active">
                                     <i class="mdi mdi-account-check"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-inactive-{{ $weightType->id }}" dataRoute="{{ route('admin.weightTypes.status',$weightType->id) }}" status="inactive" data-toggle="tooltip" data-placement="top" title="Inactive">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-inactive-{{ $deliveryCharge->id }}" dataRoute="{{ route('admin.deliveryCharge.status',$deliveryCharge->id) }}" status="inactive" data-toggle="tooltip" data-placement="top" title="Inactive">
                                     <i class="mdi mdi-account-off"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-suspend-{{ $weightType->id }}" dataRoute="{{ route('admin.weightTypes.status',$weightType->id) }}" status="suspend" data-toggle="tooltip" data-placement="top" title="Suspend">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-suspend-{{ $deliveryCharge->id }}" dataRoute="{{ route('admin.deliveryCharge.status',$deliveryCharge->id) }}" status="suspend" data-toggle="tooltip" data-placement="top" title="Suspend">
                                     <i class="mdi mdi-account-remove"></i>
                                 </a>
                             </td>
@@ -56,7 +61,7 @@ Parcel Type Lists
 
                             @push('admin-scripts')
                                 <script>
-                                $('.sa-active-{{ $weightType->id }}, .sa-inactive-{{ $weightType->id }}, .sa-suspend-{{ $weightType->id }}').on('click', function () {
+                                $('.sa-active-{{ $deliveryCharge->id }}, .sa-inactive-{{ $deliveryCharge->id }}, .sa-suspend-{{ $deliveryCharge->id }}').on('click', function () {
                                     let status = $(this).attr('status');
                                     let route = $(this).attr('dataRoute');
 

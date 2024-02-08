@@ -15,6 +15,7 @@ Parcel Type Lists
         <div class="card">
             <div class="text-center">
                 <h5 class=" mt-3 text-warning">Parcel Type Lists</h5>
+                <a href="{{ route('admin-parcel-types.create') }}" class="btn btn-sm btn-primary">Parcel Type Add</a>
             </div>
           <div class="card-body">
 

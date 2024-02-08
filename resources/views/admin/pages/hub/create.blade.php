@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Area Type Add
+Hub Add
 @endsection
 
 @section('content')
@@ -9,17 +9,14 @@ Area Type Add
     <div class="row d-flex justify-content-center">
       <div class="col-md-8">
         <div class="card">
-        <div class="text-center">
-            <h5 class=" mt-3 text-warning">Area Type</h5>
-
-        </div>
+        <h5 class="text-center mt-3 text-warning">Hub</h5>
           <div class="card-body">
 
-            <form action="{{ route('admin-area-types.store') }}" method="post">
+            <form action="{{ route('admin-hubs.store') }}" method="post">
             @csrf
                 <div class="row">
                   <div class="col">
-                    <input type="text" name="type" class="form-control border-warning @error('type') is-invalid @enderror" placeholder="Area Type" data-toggle="tooltip" data-placement="top" title="Area Type">
+                    <input type="text" name="hub_name" class="form-control border-warning @error('hub_name') is-invalid @enderror" placeholder="Hub Name" data-toggle="tooltip" data-placement="top" title="Hub Name">
                   </div>
                 </div>
                 <div class="row mt-2">

@@ -8,13 +8,17 @@ use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AreaTypeController;
+use App\Http\Controllers\Admin\CODChargeController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DeliveryChargeController;
 use App\Http\Controllers\Admin\ParcelTypeController;
 use App\Http\Controllers\Admin\WeightTypeController;
 use App\Http\Controllers\Admin\ServiceAreaController;
 use App\Http\Controllers\Admin\DeliveryTypeController;
+use App\Http\Controllers\Admin\HubController;
 use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
 use App\Http\Controllers\Driver\DashboardController as DriverDashboardController;
+use App\Models\DeliveryType;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +70,19 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin-delivery-types',DeliveryTypeController::class);
     Route::post('/admin-delivery-types-status/{deliveryType}',[DeliveryTypeController::class,'deliveryTypeStatus'])->name('admin.deliveryTypes.status');
 
-    //weight-types
-    Route::resource('admin-weight-types',WeightTypeController::class);
-    Route::post('/admin-weight-types-status/{weightType}',[WeightTypeController::class,'weightTypeStatus'])->name('admin.weightTypes.status');
+    //delivery-charges
+    Route::resource('admin-delivery-charges',DeliveryChargeController::class);
+    Route::post('/admin-delivery-charges-status/{deliveryCharge}',[DeliveryChargeController::class,'deliveryChargeStatus'])->name('admin.deliveryCharge.status');
+
+    //hub
+    Route::resource('admin-hubs',HubController::class);
+    Route::post('/admin-hub-status/{hub}',[HubController::class,'hubStatus'])->name('admin.hubs.status');
+
+
+
+    //ajax
+    Route::get('admin-delivery-type-wise-delivery-charge',[DeliveryTypeController::class,'delTypeWiseWeighType'])->name('admin.delivery-type-wise-delivery-charge');
+    Route::get('admin-delivery-charge-wise-cod-charge',[DeliveryTypeController::class,'delTypeWiseCodCharge'])->name('admin.delivery-charge-wise-cod-charge');
 
     Route::get('admin-logout',[DashboardController::class,'logout'])->name('admin.logout');
 

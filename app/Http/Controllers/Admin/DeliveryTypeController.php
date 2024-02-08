@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\DeliveryType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DeliveryCharge;
+use App\Models\WeightType;
 
 class DeliveryTypeController extends Controller
 {
@@ -103,5 +105,15 @@ class DeliveryTypeController extends Controller
         return response()->json([
             'success'=>true
         ]);
+    }
+
+    public function delTypeWiseWeighType(Request $request){
+        $deliveryCharges = DeliveryCharge::where(['delivery_type_id'=>$request->deliveryTypeValue,'area_type_id'=>$request->areaTypeValue,'parcel_type_id'=>$request->parcelTypeValue,'status'=>'active'])->get();
+        return $deliveryCharges;
+    }
+
+    public function delTypeWiseCodCharge(Request $request){
+        $deliveryCharge = DeliveryCharge::find($request->deliveryChargeValue);
+        return $deliveryCharge;
     }
 }
