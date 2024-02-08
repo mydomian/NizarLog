@@ -56,7 +56,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin-agency-status/{user}',[AgencyController::class,'agencyStatus'])->name('admin.agencies.status');
     //air bills
     Route::resource('admin-air-bills',BookingController::class);
-    Route::post('admin-air-bills-status/{user}',[BookingController::class,'airBillsStatus'])->name('admin.airBills.status');
+
 
     //area-types
     Route::resource('admin-area-types',AreaTypeController::class);

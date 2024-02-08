@@ -22,7 +22,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $airBookings = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'pending'])->latest()->paginate(50);
+        return view('admin.pages.air_bills.index',compact('airBookings'));
     }
 
     /**
@@ -68,7 +69,7 @@ class BookingController extends Controller
         $airBooking->product_details = $request->product_details;
         $airBooking->product_amount = $request->product_amount;
         $airBooking->collection_amount = $request->collection_amount;
-        $airBooking->due_amount  = $request->collection_amount - $deliveryCharge->delivery_charge;
+        $airBooking->due_amount  = $request->collection_amount - ($deliveryCharge->delivery_charge = 60);
         $airBooking->spacial_instruction = $request->spacial_instruction;
         $airBooking->delivery_charge = $deliveryCharge->delivery_charge;
         $airBooking->date_time = now();
@@ -89,7 +90,8 @@ class BookingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $airBill = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->find($id);
+        return view('admin.pages.air_bills.show',compact('airBill'));
     }
 
     /**

@@ -33,7 +33,7 @@ return new class extends Migration
             $table->float('delivery_charge');
             $table->longText('spacial_instruction');
             $table->dateTime('date_time');
-            $table->enum('status',['pending','complete','return','cancel'])->default('pending');
+            $table->enum('status',['pending','processing','complete','return','cancel'])->default('pending');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
