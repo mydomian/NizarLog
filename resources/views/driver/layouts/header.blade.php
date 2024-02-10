@@ -8,12 +8,12 @@
               <a class="navbar-brand brand-logo-mini" href=""><img style="width:64px;height:64px;" src="{{ asset('/storage') }}/{{settings()->logo}}" alt="logo"/></a>
           </div>
           <ul class="navbar-nav navbar-nav-right">
-              <li class="nav-item dropdown  d-lg-flex d-none">
+              {{-- <li class="nav-item dropdown  d-lg-flex d-none">
                 <button type="button" class="btn btn-inverse-primary btn-sm">Air Bill</button>
               </li>
               <li class="nav-item dropdown  d-lg-flex d-none">
                 <button type="button" class="btn btn-inverse-primary btn-sm">Client Manage</button>
-              </li>
+              </li> --}}
               <li class="nav-item dropdown  d-lg-flex d-none">
                 <button type="button" class="btn btn-inverse-primary btn-sm">Tracking</button>
               </li>
