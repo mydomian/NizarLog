@@ -60,8 +60,14 @@
                 <div class="submenu">
                     <ul>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.create') }}">Air Bill</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.index') }}">Lists</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Status</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.index') }}">Lists Pickup Pending</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsPickupReceived') }}">Lists Pickup Received</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsHubStore') }}">Lists Hub Store</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsTransit') }}">Lists Transit</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsDelivered') }}">Lists Delivered</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsReturn') }}">Lists Return</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsCancel') }}">Lists Cancel</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li>
                     </ul>
                 </div>
