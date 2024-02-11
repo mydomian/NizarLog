@@ -34,7 +34,7 @@ use App\Models\DeliveryType;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.login');
 });
 
 Route::match(['get','post'],'/admin/login',[AuthController::class,'adminLogin'])->name('admin.login');
@@ -54,8 +54,15 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     //agency
     Route::resource('admin-agencies',AgencyController::class);
     Route::post('/admin-agency-status/{user}',[AgencyController::class,'agencyStatus'])->name('admin.agencies.status');
+
     //air bills
     Route::resource('admin-air-bills',BookingController::class);
+    Route::match(['get','post'],'admin-lists-pickup-received',[BookingController::class,'adminListsPickupReceived'])->name('adminListsPickupReceived');
+    Route::get('admin-lists-hub-store',[BookingController::class,'adminListsHubStore'])->name('adminListsHubStore');
+    Route::get('admin-lists-transit',[BookingController::class,'adminListsTransit'])->name('adminListsTransit');
+    Route::get('admin-lists-delivered',[BookingController::class,'adminListsDelivered'])->name('adminListsDelivered');
+    Route::get('admin-lists-return',[BookingController::class,'adminListsReturn'])->name('adminListsReturn');
+    Route::get('admin-lists-cancel',[BookingController::class,'adminListsCancel'])->name('adminListsCancel');
 
 
     //area-types
