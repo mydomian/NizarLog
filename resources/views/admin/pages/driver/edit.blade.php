@@ -78,7 +78,7 @@ Driver Edit
         </div>
       </div>
     </div>
-  </div>
+</div>
 
 @endsection
 @push('admin-scripts')

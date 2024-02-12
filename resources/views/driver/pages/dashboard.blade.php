@@ -9,13 +9,15 @@ Dashboard
             <div class="row">
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
                     <div class="card bg-primary">
-                        <div class="card-body text-white">
-                            <h3 class="font-weight-bold mb-3">18,39 (75GB)</h3>
-                            <div class="progress mb-3">
-                                <div class="progress-bar  bg-warning" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        <a href="{{route('driver.pickup.requests')}}" class="text-decoration-none">
+                            <div class="card-body text-white">
+                                <h3 class="font-weight-bold mb-3">{{pickupRequest()}}</h3>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar  bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p class="pb-0 mb-0">Pick Requests</p>
                             </div>
-                            <p class="pb-0 mb-0">Bandwidth usage</p>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
