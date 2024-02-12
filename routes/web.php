@@ -18,7 +18,8 @@ use App\Http\Controllers\Admin\DeliveryTypeController;
 use App\Http\Controllers\Admin\HubController;
 use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
 use App\Http\Controllers\Driver\DashboardController as DriverDashboardController;
-use App\Models\DeliveryType;
+use App\Http\Controllers\Driver\PickupController as DriverPickupController;
+use App\Http\Controllers\Driver\SettingController as DriverSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,14 @@ Route::match(['get','post'],'/driver/login',[AuthController::class,'driverLogin'
 Route::prefix('driver')->middleware(['auth', 'driver'])->group(function () {
     Route::get('/dashboard',[DriverDashboardController::class,'dashboard'])->name('driver.dashboard');
     Route::get('driver-logout',[DriverDashboardController::class,'logout'])->name('driver.logout');
+
+    Route::get('pickups',[DriverPickupController::class,'pickupRequests'])->name('driver.pickup.requests');
+    Route::get('parcel-picked-up/{tracking}',[DriverPickupController::class,'pickedUp'])->name('parcel.picked.up');
+
+    Route::match(['get','post'],'profile-settings',[DriverSettingController::class,'settings'])->name('driver.settings');
+    Route::post('/password-confirm',[DriverSettingController::class,'checkPassword'])->name('driver.password.confirm');
+    Route::post('/password-update',[DriverSettingController::class,'updatePassword'])->name('driver.password.update');
+    Route::get('/cancel-change-password',[DriverSettingController::class,'cancel'])->name('driver.cancel.change.password');
 });
 
 //cache delete

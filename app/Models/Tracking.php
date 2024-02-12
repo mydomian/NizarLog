@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tracking extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    public function driver(){
+        return $this->belongsTo(User::class,'driver_id','id');
+    }
 }

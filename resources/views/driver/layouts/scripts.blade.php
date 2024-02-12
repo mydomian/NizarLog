@@ -11,7 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    @if(Session::has('message'))
+    @if(Session::has('message') || Session::has('success') )
     toastr.options =
     {
         "closeButton" : true,
@@ -33,7 +33,7 @@
     toastr.options =
     {
         "closeButton" : true,
-        "progressBar" : true
+        "progressBar" : true,
     }
             toastr.info("{{ session('info') }}");
     @endif
@@ -53,3 +53,4 @@
     })
   </script>
 @stack('scripts')
+@stack('modals')
