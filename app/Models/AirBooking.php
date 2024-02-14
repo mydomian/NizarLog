@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AirBooking extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
     public function user(){
         return $this->belongsTo(User::class)->with('user_info');
     }

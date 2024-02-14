@@ -109,7 +109,8 @@ Route::prefix('driver')->middleware(['auth', 'driver'])->group(function () {
     Route::get('driver-logout',[DriverDashboardController::class,'logout'])->name('driver.logout');
 
     Route::get('pickups',[DriverPickupController::class,'pickupRequests'])->name('driver.pickup.requests');
-    Route::get('parcel-picked-up/{tracking}',[DriverPickupController::class,'pickedUp'])->name('parcel.picked.up');
+    Route::get('parcel-picked-up/{air_booking}',[DriverPickupController::class,'pickedUp'])->name('parcel.picked.up');
+    Route::get('bulk-parcel-picked-up',[DriverPickupController::class,'bulkPickedUp'])->name('bulk.parcel.picked.up');
 
     Route::match(['get','post'],'profile-settings',[DriverSettingController::class,'settings'])->name('driver.settings');
     Route::post('/password-confirm',[DriverSettingController::class,'checkPassword'])->name('driver.password.confirm');
