@@ -13,4 +13,8 @@ class Tracking extends Model
     public function driver(){
         return $this->belongsTo(User::class,'driver_id','id');
     }
+
+    public function booking(){
+        return $this->belongsTo(AirBooking::class,'air_booking_id','id');
+    }
 }
