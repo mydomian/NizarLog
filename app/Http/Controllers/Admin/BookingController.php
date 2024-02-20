@@ -38,34 +38,35 @@ class BookingController extends Controller
                 $tracking = new Tracking;
                 $tracking->air_booking_id = $bookingId;
                 $tracking->driver_id = $request->user_id;
-                $tracking->driver_id = $request->user_id;
+                // $tracking->from_hub_id = $request->user_id;
             }
         }
         $airBookings = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'received_pickup_pending'])->latest()->paginate(50);
         return view('admin.pages.air_bills.pickup_received',compact('airBookings'));
     }
 
-    public function adminListsHubStore(){
+    public function adminListsHubStore(Request $request){
+
         $airBookings = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'received_delivery_hub'])->latest()->paginate(50);
         return view('admin.pages.air_bills.hub_store',compact('airBookings'));
     }
 
-    public function adminListsTransit(){
+    public function adminListsTransit(Request $request){
         $airBookings = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'in_transit'])->latest()->paginate(50);
         return view('admin.pages.air_bills.transit_list',compact('airBookings'));
     }
 
-    public function adminListsDelivered(){
+    public function adminListsDelivered(Request $request){
         $airBookings = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'delivered'])->latest()->paginate(50);
         return view('admin.pages.air_bills.delivered_list',compact('airBookings'));
     }
 
-    public function adminListsReturn(){
+    public function adminListsReturn(Request $request){
         $airBookings = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'return'])->latest()->paginate(50);
         return view('admin.pages.air_bills.return_list',compact('airBookings'));
     }
 
-    public function adminListsCancel(){
+    public function adminListsCancel(Request $request){
         $airBookings = AirBooking::with('user','service_area','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'cancel'])->latest()->paginate(50);
         return view('admin.pages.air_bills.cancel_list',compact('airBookings'));
     }
@@ -91,7 +92,7 @@ class BookingController extends Controller
         $lastBooking = AirBooking::latest()->first();
         if (!$lastBooking) {
             $invoice = 'NLOG-579845';
-        } else {
+        }else {
             $lastInvoiceNumber = explode('-', $lastBooking->invoice_no)[1];
             $newInvoiceNumber = 'NLOG-'.($lastInvoiceNumber + 1);
             $invoice = $newInvoiceNumber;
