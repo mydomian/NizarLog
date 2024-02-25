@@ -52,4 +52,5 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
   </script>
-@stack('scripts')
+@stack('agency-modals')
+@stack('agency-scripts')

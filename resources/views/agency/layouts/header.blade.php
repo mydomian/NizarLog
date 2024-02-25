@@ -9,7 +9,7 @@
           </div>
           <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown  d-lg-flex d-none">
-                <button type="button" class="btn btn-inverse-primary btn-sm">Air Bill</button>
+                <a href="{{route('agency-air-bill.create')}}" class="btn btn-inverse-primary btn-sm">Air Bill</a>
               </li>
               <li class="nav-item dropdown  d-lg-flex d-none">
                 <button type="button" class="btn btn-inverse-primary btn-sm">Client Manage</button>
@@ -24,7 +24,7 @@
                   <img src="@if(isset(Auth::user()->profile_photo_path)) {{ asset('/storage/profile/'.Auth::user()->profile_photo_path) }} @else {{ asset('/storage/profile/avatar.png') }} @endif" alt="profile"/>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a href="{{ route('admin.settings') }}" class="dropdown-item">
+                    <a href="{{ route('agency.settings') }}" class="dropdown-item">
                       <i class="mdi mdi-settings text-primary"></i>
                       Settings
                     </a>
@@ -59,7 +59,7 @@
                 </a>
                 <div class="submenu">
                     <ul>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Air Bill</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('agency-air-bill.create')}}">Air Bill</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Lists</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Status</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li>
@@ -130,7 +130,7 @@
               </a>
           </li>
             <li class="nav-item">
-                <a href="{{ route('admin.settings') }}" class="nav-link text-warning">
+                <a href="{{ route('agency.settings') }}" class="nav-link text-warning">
                   <i class="mdi mdi-settings menu-icon"></i>
                   <span class="menu-title">Settings</span></a>
             </li>
