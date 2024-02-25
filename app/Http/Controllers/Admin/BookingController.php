@@ -10,7 +10,9 @@ use App\Models\ServiceArea;
 use App\Models\DeliveryType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CodCharge;
 use App\Models\DeliveryCharge;
+use App\Models\Hub;
 use App\Models\Tracking;
 use App\Models\User;
 use Carbon\Carbon;
@@ -76,11 +78,11 @@ class BookingController extends Controller
      */
     public function create()
     {
-        $serviceAreas = ServiceArea::where(['status'=>'active'])->get();
+        $hubs = Hub::where(['status'=>'active'])->get();
         $areaTypes = AreaType::where(['status'=>'active'])->get();
         $parcelTypes = ParcelType::where(['status'=>'active'])->get();
         $deliveryTypes = DeliveryType::where(['status'=>'active'])->get();
-        return view('admin.pages.air_bills.create',compact('serviceAreas','areaTypes','parcelTypes','deliveryTypes'));
+        return view('admin.pages.air_bills.create',compact('hubs','areaTypes','parcelTypes','deliveryTypes'));
     }
 
     /**
@@ -89,6 +91,7 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $deliveryCharge = DeliveryCharge::find($request->delivery_charge_id);
+        $codCharge = CodCharge::where('type','desk_booking')->latest()->first();
         $lastBooking = AirBooking::latest()->first();
         if (!$lastBooking) {
             $invoice = 'NLOG-579845';
@@ -100,7 +103,7 @@ class BookingController extends Controller
         $airBooking = new AirBooking;
         $airBooking->invoice_no = $invoice;
         $airBooking->user_id = Auth::id();
-        $airBooking->service_area_id = $request->service_area_id;
+        $airBooking->last_destination_id = $request->last_destination_id;
         $airBooking->area_type_id = $request->area_type_id;
         $airBooking->parcel_type_id = $request->parcel_type_id;
         $airBooking->delivery_type_id = $request->delivery_type_id;
@@ -114,9 +117,11 @@ class BookingController extends Controller
         $airBooking->product_details = $request->product_details;
         $airBooking->product_amount = $request->product_amount;
         $airBooking->collection_amount = $request->collection_amount;
-        $airBooking->due_amount  = $request->collection_amount - ($deliveryCharge->delivery_charge = 60);
         $airBooking->spacial_instruction = $request->spacial_instruction;
         $airBooking->delivery_charge = $deliveryCharge->delivery_charge;
+        $total_amount = $request->product_amount + $deliveryCharge->delivery_charge;
+        $airBooking->cod_charge = ($total_amount * $codCharge->charge_percent) / 100;
+        $airBooking->due_amount  = $request->collection_amount - ($deliveryCharge->delivery_charge + $airBooking->cod_charge);
         $airBooking->date_time = now();
         $airBooking->save();
 
@@ -161,6 +166,12 @@ class BookingController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function airBillPrint(){
+        $airBillId = 5;
+        $airBill = AirBooking::find($airBillId);
+        return view('admin.pages.print.air_bill_booking',compact('airBill'));
     }
 
 

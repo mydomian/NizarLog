@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ServiceArea;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\CodCharge;
+use Illuminate\Http\Request;
 
-class ServiceAreaController extends Controller
+class CodChargeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $serviceAreas = ServiceArea::latest()->paginate(50);
-        return view('admin.pages.service_area.index',compact('serviceAreas'));
+        $cods = CodCharge::latest()->paginate(50);
+        return view('admin.pages.cod_charge.index',compact('cods'));
     }
 
     /**
@@ -25,7 +24,8 @@ class ServiceAreaController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.service_area.create');
+
+        return view('admin.pages.cod_charge.create');
     }
 
     /**
@@ -37,14 +37,15 @@ class ServiceAreaController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'name' => 'required|string',
-            'code' => 'required|string',
+            'type' => 'required',
+            'charge_percent' => 'required',
         ]);
-        $area = new ServiceArea;
-        $area->name = ucfirst($request->name);
-        $area->code = $request->code;
-        $area->save();
-        return back()->with('message','Area Created Successfully');
+
+        $cod = new CodCharge;
+        $cod->type = $request->type;
+        $cod->charge_percent = $request->charge_percent;
+        $cod->save();
+        return back()->with('message','COD Created Successfully');
     }
 
     /**
@@ -66,8 +67,8 @@ class ServiceAreaController extends Controller
      */
     public function edit($id)
     {
-        $serviceArea = ServiceArea::find($id);
-        return view('admin.pages.service_area.edit',compact('serviceArea'));
+        $cod = CodCharge::find($id);
+        return view('admin.pages.cod_charge.edit',compact('cod'));
     }
 
     /**
@@ -80,14 +81,15 @@ class ServiceAreaController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
-            'name' => 'required|string',
-            'code' => 'required|string',
+            'type' => 'required',
+            'charge_percent' => 'required',
         ]);
-        $area = ServiceArea::find($id);
-        $area->name = ucfirst($request->name);
-        $area->code = $request->code;
-        $area->save();
-        return back()->with('message','Area Updated Successfully');
+
+        $cod = CodCharge::find($id);
+        $cod->type = $request->type;
+        $cod->charge_percent = $request->charge_percent;
+        $cod->save();
+        return back()->with('message','Hub Updated Successfully');
     }
 
     /**
@@ -101,12 +103,11 @@ class ServiceAreaController extends Controller
         //
     }
 
-    public function serviceAreaStatus(Request $request, ServiceArea $serviceArea){
-        $serviceArea->status = $request->status;
-        $serviceArea->save();
+    public function CODStatus(Request $request, CodCharge $cod){
+        $cod->status = $request->status;
+        $cod->save();
         return response()->json([
             'success'=>true
         ]);
     }
-
 }

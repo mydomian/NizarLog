@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Hub Add
+COD Charge Add
 @endsection
 @push('admin-links-css')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -29,26 +29,25 @@ Hub Add
     <div class="row d-flex justify-content-center">
       <div class="col-md-6">
         <div class="card">
-        <h5 class="text-center mt-3 text-warning">Hub</h5>
+        <h5 class="text-center mt-3 text-warning">COD Charge Add</h5>
           <div class="card-body">
 
-            <form action="{{ route('admin-hubs.store') }}" method="post">
+            <form action="{{ route('admin-cod-charge.store') }}" method="post">
             @csrf
                 <div class="row">
-                    <div class="col" data-toggle="tooltip" data-placement="top" title="Hub Parent Select">
-                        <select id="hub_parent" class="js-example-basic-single @error('hub_parent') is-invalid @enderror" name="hub_parent" style="width:100%">
-                            <option value="">Parent Hub Select</option>
-                            @foreach ($hubs as $hub)
-                                <option value="{{ $hub->hub_name }}">{{ $hub->hub_name }} - ({{ $hub->hub_parent ? $hub->hub_parent : 'Parent' }})</option>
-                            @endforeach
+                    <div class="col" data-toggle="tooltip" data-placement="top" title="Type Select">
+                        <select id="type" class="js-example-basic-single @error('type') is-invalid @enderror" name="type" style="width:100%">
+                            <option value="">Type Select</option>
+
+                            <option value="desk_booking">Desk Booking</option>
+                            <option value="agency">Agency</option>
+
                         </select>
                     </div>
                     <div class="col">
-                        <input type="text" name="hub_name" class="form-control border-warning @error('hub_name') is-invalid @enderror" placeholder="Hub Name" data-toggle="tooltip" data-placement="top" title="Hub Name">
+                        <input type="text" name="charge_percent" class="form-control border-warning @error('charge_percent') is-invalid @enderror" placeholder="Charge Percent" data-toggle="tooltip" data-placement="top" title="Charge Percent">
                     </div>
-                    <div class="col">
-                        <input type="text" name="hub_code" class="form-control border-warning @error('hub_code') is-invalid @enderror" placeholder="Hub Code" data-toggle="tooltip" data-placement="top" title="Hub Code">
-                    </div>
+
                 </div>
                 <div class="row mt-2">
                     <div class="col d-flex justify-content-end">

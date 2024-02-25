@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\DeliveryType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\CodCharge;
 use App\Models\DeliveryCharge;
 use App\Models\WeightType;
 
@@ -115,5 +116,21 @@ class DeliveryTypeController extends Controller
     public function delTypeWiseCodCharge(Request $request){
         $deliveryCharge = DeliveryCharge::find($request->deliveryChargeValue);
         return $deliveryCharge;
+    }
+
+    public function CodCharge(Request $request){
+        $deliveryCharge = DeliveryCharge::find($request->totalChargeId);
+        $charge = $deliveryCharge->delivery_charge;
+        $productAmount = $request->productAmount;
+        $total_amount = $charge+$productAmount;
+
+        $percent = CodCharge::where('type','desk_booking')->latest()->first();
+
+        $percentageAmount = ($total_amount * $percent->charge_percent) / 100;
+        return response()->json([
+            'percentageAmount'=> $percentageAmount,
+            'deliveryCharge' => $charge
+        ]);
+
     }
 }

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_areas', function (Blueprint $table) {
+        Schema::create('cod_charges', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code');
+            $table->float('charge_percent');
+            $table->enum('type',['desk_booking','agency']);
             $table->enum('status',['active','inactive','suspend'])->default('active');
             $table->timestamps();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_areas');
+        Schema::dropIfExists('cod_charges');
     }
 };

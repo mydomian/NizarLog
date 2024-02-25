@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('invoice_no');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('service_area_id');
+            $table->unsignedBigInteger('last_destination_id');
             $table->unsignedBigInteger('area_type_id');
             $table->unsignedBigInteger('parcel_type_id');
             $table->unsignedBigInteger('delivery_type_id');
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->float('product_amount');
             $table->float('collection_amount');
             $table->float('due_amount');
+            $table->float('cod_charge');
             $table->float('delivery_charge');
             $table->longText('spacial_instruction');
             $table->dateTime('date_time');
@@ -37,7 +38,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('service_area_id')->references('id')->on('service_areas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('last_destination_id')->references('id')->on('hubs')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('area_type_id')->references('id')->on('area_types')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('parcel_type_id')->references('id')->on('parcel_types')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('delivery_type_id')->references('id')->on('delivery_types')->onUpdate('cascade')->onDelete('cascade');

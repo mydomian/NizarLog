@@ -13,12 +13,12 @@ Delivery Type Lists
     <div class="row d-flex justify-content-center">
       <div class="col-md-12">
         <div class="card">
-            <div class="text-center">
-                <h5 class=" mt-3 text-warning">Delivery Type Lists</h5>
-                <a href="{{ route('admin-delivery-types.index') }}" class="btn btn-sm btn-primary">Delivery Type Add</a>
-            </div>
           <div class="card-body">
-
+            <div class="card-title d-flex justify-content-between">
+                <h5 class="text-center text-warning">Delivery Type Lists</h5>
+                <a href="{{ route('admin-delivery-types.index') }}" class="btn btn-lg btn-primary">Add Delivery Type</a>
+                <div></div>
+            </div>
             <div class="service-delivery-append">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead class="bg-warning">
