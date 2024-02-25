@@ -13,18 +13,21 @@ Hub Lists
     <div class="row d-flex justify-content-center">
       <div class="col-md-12">
         <div class="card">
-            <div class="text-center">
-                <h5 class=" mt-3 text-warning">Hub Lists</h5>
-                <a href="{{ route('admin-hubs.create') }}" class="btn btn-sm btn-primary">Hub Add</a>
-            </div>
-          <div class="card-body">
 
+          <div class="card-body">
+            <div class="card-title d-flex justify-content-between">
+                <h5 class="text-center text-warning">Hub Lists</h5>
+                <a href="{{ route('admin-hubs.create') }}" class="btn btn-lg btn-primary">Add Hub</a>
+                <div></div>
+            </div>
             <div class="service-delivery-append">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead class="bg-warning">
                         <tr>
                             <th>Id</th>
                             <th>Hub Name</th>
+                            <th>Hub Parent</th>
+                            <th>Hub Code</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -34,6 +37,8 @@ Hub Lists
                         <tr>
                             <td>{{ $hub->id }}</td>
                             <td>{{ $hub->hub_name ?? "-" }}</td>
+                            <td>{{ $hub->hub_parent ?? "-" }}</td>
+                            <td>{{ $hub->hub_code ?? "-" }}</td>
                             <td><span class="badge badge-info">{{ $hub->status }}</span></td>
                             <td>
                                 <a href="{{ route('admin-hubs.edit',$hub->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">

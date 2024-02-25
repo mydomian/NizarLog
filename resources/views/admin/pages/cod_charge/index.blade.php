@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Service Area Lists
+COD Charge Lists
 @endsection
 @push('admin-links-css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -13,40 +13,42 @@ Service Area Lists
     <div class="row d-flex justify-content-center">
       <div class="col-md-12">
         <div class="card">
-            <div class="text-center">
-                <h5 class=" mt-3 text-warning">Service Area Lists</h5>
-            </div>
-          <div class="card-body">
 
-            <div class="service-area-append">
+          <div class="card-body">
+            <div class="card-title d-flex justify-content-between">
+                <h5 class="text-center text-warning">COD Charge Lists</h5>
+                <a href="{{ route('admin-cod-charge.create') }}" class="btn btn-lg btn-primary">Add COD Charge</a>
+                <div></div>
+            </div>
+            <div class="service-delivery-append">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead class="bg-warning">
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
-                            <th>Code</th>
+                            <th>Charge Percent</th>
+                            <th>Type</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($serviceAreas as $serviceArea)
+                        @foreach ($cods as $cod)
                         <tr>
-                            <td>{{ $serviceArea->id }}</td>
-                            <td>{{ $serviceArea->name ?? "-" }}</td>
-                            <td>{{ $serviceArea->code ?? "-" }}</td>
-                            <td><span class="badge badge-info">{{ $serviceArea->status }}</span></td>
+                            <td>{{ $cod->id }}</td>
+                            <td>{{ $cod->charge_percent ?? "-" }}</td>
+                            <td>{{ $cod->type ?? "-" }}</td>
+                            <td><span class="badge badge-info">{{ $cod->status }}</span></td>
                             <td>
-                                <a href="{{ route('service-areas.edit',$serviceArea->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="{{ route('admin-cod-charge.edit',$cod->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="mdi mdi-pencil-box-outline"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text sa-active-{{ $serviceArea->id }}" dataRoute="{{ route('admin.serviceArea.status',$serviceArea->id) }}" status="active" data-toggle="tooltip" data-placement="top" title="Active">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text sa-active-{{ $cod->id }}" dataRoute="{{ route('admin.COD.status',$cod->id) }}" status="active" data-toggle="tooltip" data-placement="top" title="Active">
                                     <i class="mdi mdi-account-check"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-inactive-{{ $serviceArea->id }}" dataRoute="{{ route('admin.serviceArea.status',$serviceArea->id) }}" status="inactive" data-toggle="tooltip" data-placement="top" title="Inactive">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-inactive-{{ $cod->id }}" dataRoute="{{ route('admin.COD.status',$cod->id) }}" status="inactive" data-toggle="tooltip" data-placement="top" title="Inactive">
                                     <i class="mdi mdi-account-off"></i>
                                 </a>
-                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-suspend-{{ $serviceArea->id }}" dataRoute="{{ route('admin.serviceArea.status',$serviceArea->id) }}" status="suspend" data-toggle="tooltip" data-placement="top" title="Suspend">
+                                <a href="javascript:;" type="button" class="btn btn-sm btn-primary btn-icon-text  sa-suspend-{{ $cod->id }}" dataRoute="{{ route('admin.COD.status',$cod->id) }}" status="suspend" data-toggle="tooltip" data-placement="top" title="Suspend">
                                     <i class="mdi mdi-account-remove"></i>
                                 </a>
                             </td>
@@ -54,7 +56,7 @@ Service Area Lists
 
                             @push('admin-scripts')
                                 <script>
-                                $('.sa-active-{{ $serviceArea->id }}, .sa-inactive-{{ $serviceArea->id }}, .sa-suspend-{{ $serviceArea->id }}').on('click', function () {
+                                $('.sa-active-{{ $cod->id }}, .sa-inactive-{{ $cod->id }}, .sa-suspend-{{ $cod->id }}').on('click', function () {
                                     let status = $(this).attr('status');
                                     let route = $(this).attr('dataRoute');
 

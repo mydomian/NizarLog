@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('hubs', function (Blueprint $table) {
             $table->id();
+            $table->string('hub_parent')->nullable();
             $table->string('hub_name');
+            $table->string('hub_code');
             $table->enum('status',['active','inactive','suspend'])->default('active');
             $table->timestamps();
+
         });
     }
 

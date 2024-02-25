@@ -20,6 +20,7 @@ use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController
 use App\Http\Controllers\Driver\DashboardController as DriverDashboardController;
 use App\Http\Controllers\Driver\PickupController as DriverPickupController;
 use App\Http\Controllers\Driver\SettingController as DriverSettingController;
+use App\Models\AirBooking;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +50,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     //drivers
     Route::resource('admin-drivers',DriverController::class);
     Route::post('/admin-drivers-status/{user}',[DriverController::class,'driverStatus'])->name('admin.drivers.status');
-    //service area
-    Route::resource('service-areas',ServiceAreaController::class);
-    Route::post('/service-areas-status/{serviceArea}',[ServiceAreaController::class,'serviceAreaStatus'])->name('admin.serviceArea.status');
+
     //agency
     Route::resource('admin-agencies',AgencyController::class);
     Route::post('/admin-agency-status/{user}',[AgencyController::class,'agencyStatus'])->name('admin.agencies.status');
@@ -86,11 +85,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('admin-hubs',HubController::class);
     Route::post('/admin-hub-status/{hub}',[HubController::class,'hubStatus'])->name('admin.hubs.status');
 
+    //admin-cod-charge
+    Route::resource('admin-cod-charge',CODChargeController::class);
+    Route::post('/admin-cod-charge-status/{cod}',[CODChargeController::class,'CODStatus'])->name('admin.COD.status');
 
+    //print pages
+    Route::get('air-booking-print',[BookingController::class,'airBillPrint'])->name('admin.airBillPrint');
 
     //ajax
     Route::get('admin-delivery-type-wise-delivery-charge',[DeliveryTypeController::class,'delTypeWiseWeighType'])->name('admin.delivery-type-wise-delivery-charge');
     Route::get('admin-delivery-charge-wise-cod-charge',[DeliveryTypeController::class,'delTypeWiseCodCharge'])->name('admin.delivery-charge-wise-cod-charge');
+    Route::get('cod-charge',[DeliveryTypeController::class,'CodCharge'])->name('admin.cod-charge');
 
     Route::get('admin-logout',[DashboardController::class,'logout'])->name('admin.logout');
 

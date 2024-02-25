@@ -100,41 +100,6 @@
               </div>
           </li>
 
-          <li class="nav-item">
-            <a href="" class="nav-link text-warning">
-              <i class="mdi mdi-access-point-network menu-icon"></i>
-              <span class="menu-title">Service Area</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="submenu">
-                <ul>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('service-areas.create') }}">Add</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('service-areas.index') }}">Lists</a></li>
-                </ul>
-            </div>
-          </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link text-warning">
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                <span class="menu-title">Menus</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="submenu">
-                  <ul>
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-area-types.index') }}">Lists Area Type</a></li>
-
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-parcel-types.index') }}">Lists Parcel Type</a></li>
-
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-types.index') }}">Lists Delivery Type</a></li>
-
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-charges.index') }}">Lists Delivery Charge</a></li>
-
-                      <li class="nav-item"><a class="nav-link" href="{{ route('admin-hubs.index') }}">Lists Hub</a></li>
-
-                  </ul>
-              </div>
-          </li>
 
             <li class="nav-item">
               <a href="{{ url('/sample-pages') }}" class="nav-link text-warning">
@@ -147,6 +112,22 @@
                 <a href="{{ route('admin.settings') }}" class="nav-link text-warning">
                   <i class="mdi mdi-settings menu-icon"></i>
                   <span class="menu-title">Settings</span></a>
+                  <div class="submenu">
+                    <ul>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-area-types.index') }}">Lists Area Type</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-parcel-types.index') }}">Lists Parcel Type</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-types.index') }}">Lists Delivery Type</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-delivery-charges.index') }}">Lists Delivery Charge</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-hubs.index') }}">Lists Hub</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin-cod-charge.index') }}">Lists COD Charge</a></li>
+
+                    </ul>
+                </div>
             </li>
           </ul>
       </div>

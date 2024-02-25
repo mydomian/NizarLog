@@ -11,7 +11,7 @@ Dashboard
                     <div class="card bg-primary">
                         <a href="{{route('driver.pickup.requests')}}" class="text-decoration-none">
                             <div class="card-body text-white">
-                                <h3 class="font-weight-bold mb-3">{{pickupRequest()}}</h3>
+                                <h3 class="font-weight-bold mb-3">{{ pickupRequest() ?? 0 }}</h3>
                                 <div class="progress mb-3">
                                     <div class="progress-bar  bg-warning" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>

@@ -13,12 +13,13 @@ Delivery Charge Lists
     <div class="row d-flex justify-content-center">
       <div class="col-md-12">
         <div class="card">
-            <div class="text-center">
-                <h5 class=" mt-3 text-warning">Delivery Charge Lists</h5>
-                <a href="{{ route('admin-delivery-charges.create') }}" class="btn btn-sm btn-primary">Delivery Charge Add</a>
-            </div>
-          <div class="card-body">
 
+          <div class="card-body">
+            <div class="card-title d-flex justify-content-between">
+                <h5 class="text-center text-warning">Delivery Charge Lists</h5>
+                <a href="{{ route('admin-delivery-charges.create') }}" class="btn btn-lg btn-primary">Add Delivery Charge</a>
+                <div></div>
+            </div>
             <div class="service-parcel-append">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead class="bg-warning">

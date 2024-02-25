@@ -24,7 +24,8 @@ class HubController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.hub.create');
+        $hubs = Hub::where(['status'=>'active'])->get();
+        return view('admin.pages.hub.create',compact('hubs'));
     }
 
     /**
@@ -36,10 +37,14 @@ class HubController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
+            'hub_parent' => 'nullable',
             'hub_name' => 'required|string',
+            'hub_code' => 'required',
         ]);
         $hub = new Hub;
+        $hub->hub_parent = ucfirst($request->hub_parent);
         $hub->hub_name = ucfirst($request->hub_name);
+        $hub->hub_code = $request->hub_code;
         $hub->save();
         return back()->with('message','Hub Created Successfully');
     }
@@ -63,8 +68,9 @@ class HubController extends Controller
      */
     public function edit($id)
     {
-        $hub = Hub::find($id);
-        return view('admin.pages.hub.edit',compact('hub'));
+        $hubData = Hub::find($id);
+        $hubs = Hub::where(['status'=>'active'])->get();
+        return view('admin.pages.hub.edit',compact('hubData','hubs'));
     }
 
     /**
@@ -77,10 +83,14 @@ class HubController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
+            'hub_parent' => 'nullable',
             'hub_name' => 'required|string',
+            'hub_code' => 'required',
         ]);
         $hub = Hub::find($id);
+        $hub->hub_parent = ucfirst($request->hub_parent);
         $hub->hub_name = ucfirst($request->hub_name);
+        $hub->hub_code = $request->hub_code;
         $hub->save();
         return back()->with('message','Hub Updated Successfully');
     }
