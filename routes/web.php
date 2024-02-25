@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\ServiceAreaController;
 use App\Http\Controllers\Admin\DeliveryTypeController;
 use App\Http\Controllers\Admin\HubController;
 use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
+use App\Http\Controllers\Agency\AirBillController as AgencyAirBillController;
+use App\Http\Controllers\Agency\SettingController as AgencySettingController;
 use App\Http\Controllers\Driver\DashboardController as DriverDashboardController;
 use App\Http\Controllers\Driver\PickupController as DriverPickupController;
 use App\Http\Controllers\Driver\SettingController as DriverSettingController;
@@ -105,6 +107,12 @@ Route::match(['get','post'],'/agency/login',[AuthController::class,'agencyLogin'
 Route::prefix('agency')->middleware(['auth', 'agency'])->group(function () {
     Route::get('/dashboard',[AgencyDashboardController::class,'dashboard'])->name('agency.dashboard');
     Route::get('agency-logout',[AgencyDashboardController::class,'logout'])->name('agency.logout');
+
+    Route::match(['get','post'],'agency/profile',[AgencySettingController::class,'setting'])->name('agency.settings'); 
+    Route::post('/agency-password-confirm',[AgencySettingController::class,'checkPassword'])->name('agency.password.confirm');
+    Route::post('/agency-password-update',[AgencySettingController::class,'updatePassword'])->name('agency.password.update');
+    Route::get('/agency-cancel-change-password',[AgencySettingController::class,'cancel'])->name('agency.cancel.change.password');
+    Route::resource('agency-air-bill', AgencyAirBillController::class);
 
 });
 
