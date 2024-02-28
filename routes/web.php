@@ -114,6 +114,14 @@ Route::prefix('agency')->middleware(['auth', 'agency'])->group(function () {
     Route::get('/agency-cancel-change-password',[AgencySettingController::class,'cancel'])->name('agency.cancel.change.password');
     Route::resource('agency-air-bill', AgencyAirBillController::class);
 
+
+    Route::get('agency-delivery-type-wise-delivery-charge',[AgencyAirBillController::class,'delTypeWiseWeighType'])->name('agency.delivery-type-wise-delivery-charge');
+    Route::get('agency-delivery-charge-wise-cod-charge',[AgencyAirBillController::class,'delTypeWiseCodCharge'])->name('agency.delivery-charge-wise-cod-charge');
+    Route::get('cod-charge-agency',[AgencyAirBillController::class,'CodCharge'])->name('agency.cod-charge');
+
+
+    Route::get('agency-air-booking-print/{airBillPrint}',[AgencyAirBillController::class,'airBillPrint'])->name('agency.airBillPrint');
+
 });
 
 Route::match(['get','post'],'/driver/login',[AuthController::class,'driverLogin'])->name('driver.login');
@@ -122,8 +130,12 @@ Route::prefix('driver')->middleware(['auth', 'driver'])->group(function () {
     Route::get('driver-logout',[DriverDashboardController::class,'logout'])->name('driver.logout');
 
     Route::get('pickups',[DriverPickupController::class,'pickupRequests'])->name('driver.pickup.requests');
+    Route::get('pickedup-list',[DriverPickupController::class,'pickupList'])->name('driver.pickup.list');
+    Route::get('delivered-to-hub-list',[DriverPickupController::class,'deliveredToHubList'])->name('driver.delivered.to.hub.list');
     Route::get('parcel-picked-up/{air_booking}',[DriverPickupController::class,'pickedUp'])->name('parcel.picked.up');
+    Route::get('parcel-delivered-to-hub/{air_booking}',[DriverPickupController::class,'deliveredToHub'])->name('parcel.delivered.to.hub');
     Route::get('bulk-parcel-picked-up',[DriverPickupController::class,'bulkPickedUp'])->name('bulk.parcel.picked.up');
+    Route::get('bulk-parcel-delivered-to-hub',[DriverPickupController::class,'bulkDeliveredToHub'])->name('bulk.parcel.delivered.to.hub');
 
     Route::match(['get','post'],'profile-settings',[DriverSettingController::class,'settings'])->name('driver.settings');
     Route::post('/password-confirm',[DriverSettingController::class,'checkPassword'])->name('driver.password.confirm');

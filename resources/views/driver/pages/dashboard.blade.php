@@ -22,20 +22,24 @@ Dashboard
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
                     <div class="card sale-diffrence-border">
-                        <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
-                            <h4 class="card-title mb-2">Sales Difference</h4>
-                            <small class="text-muted">APRIL 2019</small>
-                        </div>
+                        <a href="{{route('driver.pickup.list')}}" class="text-decoration-none">
+                            <div class="card-body">
+                                <h2 class="text-dark mb-2 font-weight-bold">{{ totalPickedUp() }}</h2>
+                                <h4 class="card-title mb-2">Total Picked up</h4>
+                                <small class="badge badge-primary text-muted text-uppercase">pending: {{ totalPickupRequest() - totalPickedUp() }}</small>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
                     <div class="card sale-visit-statistics-border">
-                        <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$3479</h2>
-                            <h4 class="card-title mb-2">Visit Statistics</h4>
-                            <small class="text-muted">APRIL 2019</small>
-                        </div>
+                        <a href="{{route('driver.delivered.to.hub.list')}}" class="text-decoration-none">
+                            <div class="card-body">
+                                <h2 class="text-dark mb-2 font-weight-bold">{{ totalDeliveredtoHub() }}</h2>
+                                <h4 class="card-title mb-2">Delivered to hub</h4>
+                                <small class="text-muted"></small>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">

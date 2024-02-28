@@ -35,16 +35,18 @@ class BookingController extends Controller
         if($request->isMethod('post')){
 
             foreach($request->ids as $bookingId){
-
                 $airBooking = AirBooking::find($bookingId);
-                $airBooking->status = 'received_pickup_pending';
+                $airBooking->status = 'assign_delivery_man';
                 $airBooking->save();
 
 
                 $tracking = new Tracking;
                 $tracking->air_booking_id = $bookingId;
                 $tracking->driver_id = $request->driver_id;
-                $tracking->from_hub_id = $request->user_id;
+                $tracking->from_hub_id = $airBooking->user_id;
+                $tracking->to_hub_id = $request->to_hub_id;
+                $tracking->status = 'assign_delivery_man';
+                $tracking->save();
             }
         }
         $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'received_pickup_pending'])->latest()->paginate(50);

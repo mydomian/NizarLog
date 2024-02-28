@@ -1,6 +1,6 @@
 @extends('agency.layouts.master')
 @section('title')
-Create Air Bill
+Air Bill Generate
 @endsection
 @push('agency-css')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -32,7 +32,7 @@ Create Air Bill
           <h5 class="text-center mt-3 text-warning">Air Bill Generate</h5>
           <div class="card-body">
 
-            <form action="{{ route('agency-air-bill.store') }}" method="post">
+            <form action="{{route('agency-air-bill.store')}}" method="post">
             @csrf
                 <div class="row">
                   <label for="From">From:</label>
@@ -60,10 +60,10 @@ Create Air Bill
                 </div>
                 <div class="row mt-3">
                   <div class="col-md-4">
-                    <select  class="js-example-basic-single @error('service_area_id') is-invalid @enderror" name="service_area_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Destination" required>
+                    <select  class="js-example-basic-single @error('last_destination_id') is-invalid @enderror" name="last_destination_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Destination" required>
                         <option value="">Select Destination</option>
-                        @foreach ($serviceAreas as $serviceArea)
-                            <option value="{{ $serviceArea->id }}">{{ $serviceArea->name }} ({{ $serviceArea->code }})</option>
+                        @foreach ($hubs as $hub)
+                            <option value="{{ $hub->id }}">{{ $hub->hub_name }} ({{ $hub->hub_code }})</option>
                         @endforeach
                     </select>
                   </div>
@@ -107,7 +107,7 @@ Create Air Bill
                      <textarea name="product_details" class="form-control border-warning @error('parcel_type_id') is-invalid @enderror" placeholder="Product Details" id="" style="height: 45px;" data-toggle="tooltip" data-placement="top" title="Product Details" required></textarea>
                   </div>
                   <div class="col">
-                    <input type="number" name="product_amount" class="form-control product_amount border-warning @error('product_amount') is-invalid @enderror" placeholder="Product Amount" data-toggle="tooltip" data-placement="top" title="Product Amount">
+                    <input type="number" name="product_amount" class="form-control product_amount border-warning @error('product_amount') is-invalid @enderror" id="product_amount" placeholder="Product Amount" data-toggle="tooltip" data-placement="top" title="Product Amount">
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -183,7 +183,7 @@ Create Air Bill
             }
             $.ajax({
                     method: "get",
-                    url: "{{ route('admin.delivery-type-wise-delivery-charge') }}",
+                    url: "{{ route('agency.delivery-type-wise-delivery-charge') }}",
                     data: {
                         deliveryTypeValue:deliveryTypeValue,areaTypeValue:areaTypeValue,parcelTypeValue:parcelTypeValue
                     },
@@ -203,20 +203,39 @@ Create Air Bill
             var deliveryChargeValue = $(this).val();
             $.ajax({
                     method: "get",
-                    url: "{{ route('admin.delivery-charge-wise-cod-charge') }}",
+                    url: "{{ route('agency.delivery-charge-wise-cod-charge') }}",
                     data: {
                         deliveryChargeValue:deliveryChargeValue
                     },
                     success: function(response) {
-                        console.log(response)
                         $('.delivery_charge_value').html(response.delivery_charge);
-                        $('.cod_charge_value').html(60);
-                        $('.total_charge_value').html(60+response.delivery_charge);
                     },
                     error: function(response) {
                         console.log(response);
                     }
             });
+        });
+
+        $('#product_amount').keyup(function() {
+            var totalChargeId = $('#delivery_charge_id').val();
+            var productAmount = $(this).val();
+
+            $.ajax({
+                    method: "get",
+                    url: "{{ route('agency.cod-charge') }}",
+                    data: {
+                        totalChargeId:totalChargeId,
+                        productAmount:productAmount
+                    },
+                    success: function(response) {
+                        $('.cod_charge_value').html(response.percentageAmount);
+                        $('.total_charge_value').html(response.percentageAmount+response.deliveryCharge);
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+            });
+
         });
 
         $('.collection_amount').keyup(function() {
@@ -226,15 +245,17 @@ Create Air Bill
             var recievableAmount = collectionAmount - totalChargeValue;
             $('.receivable_amount_merchant').html(recievableAmount)
 
-
-
-            // var productAmountValue = $('.product_amount').val();
-            // if(productAmountValue == ''){
-            //     alert('Enter Product Amount');
-            // }
-
         });
 
     });
 </script>
+{{-- <script>
+  @if (session()->has('print'))
+    $(document).ready(function(){
+      var airbooking = {{session()->get('print')}}
+      var url = "agency-air-booking-print/"+airbooking;
+      window.location = window.open(url, "_blank");
+    })
+  @endif
+</script> --}}
 @endpush
