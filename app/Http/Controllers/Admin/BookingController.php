@@ -35,7 +35,6 @@ class BookingController extends Controller
         if($request->isMethod('post')){
 
             foreach($request->ids as $bookingId){
-
                 $airBooking = AirBooking::find($bookingId);
                 $airBooking->status = 'assign_delivery_man';
                 $airBooking->save();
@@ -43,7 +42,9 @@ class BookingController extends Controller
                 $tracking = new Tracking;
                 $tracking->air_booking_id = $bookingId;
                 $tracking->driver_id = $request->driver_id;
+
                 $tracking->from_hub_id = null;
+
                 $tracking->to_hub_id = $request->to_hub_id;
                 $tracking->status = 'assign_delivery_man';
                 $tracking->save();

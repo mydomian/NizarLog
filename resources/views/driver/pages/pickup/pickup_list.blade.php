@@ -1,6 +1,6 @@
 @extends('driver.layouts.master')
 @section('title')
-    Pickup Requests
+    Picked up List
 @endsection
 @push('links-css')
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> --}}
@@ -13,8 +13,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="text-center d-flex justify-content-between p-3">
-                        <h5 class=" text-warning">Pickup Requests <span class="fw-bold text-danger">({{$pickup_requests->count()}})</span></h5>
-                        <button class="btn btn-outline-success bulk_btn btn-sm d-none" data-route="{{route('bulk.parcel.picked.up')}}">Mark selected as Picked up</button>
+                        <h5 class=" text-warning">Picked up List <span class="fw-bold text-danger">({{$pickedUps->count()}})</span></h5>
+                        <button class="btn btn-outline-success bulk_btn btn-sm d-none" data-route="{{route('bulk.parcel.delivered.to.hub')}}">Mark selected as delivered to hub</button>
                     </div>
                     <div class="card-body">
 
@@ -39,7 +39,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($pickup_requests as $pickup)
+                                @foreach ($pickedUps as $pickup)
                                     <tr>
                                         <td>
                                             <div class="form-check form-check-success" style="margin: 0px; padding: 0px">
@@ -54,12 +54,12 @@
                                         <td>{{ $pickup->to_hub->address ?? "-" }}</td>
                                         <td>{{ $pickup->booking->spacial_instruction ?? "-" }}</td>
                                         <td>
-                                            <label class="badge badge-outline-danger text-uppercase">Pickup pending</label>
+                                            <label class="badge badge-outline-danger text-uppercase">Picked up </label>
                                         </td>
                                         <td>
-                                            <a href="javascript:;"  type="button" class="btn btn-sm btn-success btn-icon-text received-{{$pickup->id}}" data-route="{{route('parcel.picked.up', $pickup->air_booking_id)}}" data-toggle="tooltip" data-placement="top" title="Mark as Picked">
+                                            <a href="javascript:;"  type="button" class="btn btn-sm btn-success btn-icon-text received-{{$pickup->id}}" data-route="{{route('parcel.delivered.to.hub', $pickup->air_booking_id)}}" data-toggle="tooltip" data-placement="top" title="Mark as delivered to hub">
                                                 <i class="mdi mdi-checkbox-marked-circle-outline"></i>
-                                                <small class="mx-1">Mark as Picked up</small>
+                                                <small class="mx-1">Mark as delivered to Hub</small>
                                             </a>
                                         </td>
                                     </tr>
@@ -69,7 +69,7 @@
                                             $('.received-{{ $pickup->id }}').on('click', function () {
                                                 let route = $(this).data('route');
                                                 swal({
-                                                    title: "Parcel Picked up?",
+                                                    title: "Parcel Delivered to hub?",
                                                     text: "You won\'t be able to revert this!",
                                                     icon: "warning",
                                                     buttons: true,
@@ -142,7 +142,7 @@
                 let route = $(this).data('route')+'?ids='+id;
                 console.log(route)
                 swal({
-                    title: "All Parcel Picked up?",
+                    title: "All Parcels are delivered to hub?",
                     text: "You won\'t be able to revert these!",
                     icon: "warning",
                     buttons: true,

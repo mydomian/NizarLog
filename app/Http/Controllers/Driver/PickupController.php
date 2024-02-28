@@ -12,27 +12,30 @@ use Illuminate\Support\Facades\DB;
 class PickupController extends Controller
 {
     public function pickupRequests(){
-        $pickup_requests = Tracking::with('driver:id,name','booking:id,spacial_instruction')->where('driver_id', auth()->id())
-                                            ->where('status','pickup_pending')
+        $pickup_requests = Tracking::with('driver:id,name','booking:id,invoice_no,spacial_instruction','from_hub:id,address','to_hub:id,address')
+                                            ->where('driver_id', auth()->id())
+                                            ->where('status','assign_delivery_man')
                                             ->whereNotExists(function ($query) {
                                                     $query->select(DB::raw(1))
                                                             ->from('trackings as t2')
                                                             ->whereColumn('t2.air_booking_id', 'trackings.air_booking_id')
-                                                            ->where('t2.status', '!=', 'pickup_pending');
+                                                            ->where('t2.status', '!=', 'pickup_pending')
+                                                            ->where('t2.status', '!=', 'assign_delivery_man');
                                                     })
                                             ->get();
         return view('driver.pages.pickup.pickup_requests',compact('pickup_requests'));
     }
 
-    public function pickedUp(AirBooking $airBooking){;
-           DB::transaction(function () use ($airBooking){
+    public function pickedUp(AirBooking $airBooking){
+           $existing_tracking = Tracking::where('air_booking_id', $airBooking->id)->latest()->first();
+           DB::transaction(function () use ($airBooking, $existing_tracking){
                $tracking = Tracking::create([
                    'air_booking_id' => $airBooking->id,
-                   'driver_id' => Auth::id(),
-                   'from_hub_id' => null,
-                   'to_hub_id' =>null,
+                   'driver_id'      => Auth::id(),
+                   'from_hub_id'    => $existing_tracking->from_hub_id,
+                   'to_hub_id'      =>$existing_tracking->from_hub_id,
                    'destination_address' => null,
-                   'status' => 'received_pickup_pending'
+                   'status'         => 'received_pickup_pending'
                ]);
 
               $tracking->booking()->update([
@@ -53,10 +56,14 @@ class PickupController extends Controller
         DB::transaction(function () use ($request) {
             $ids  = explode(',', $request->ids);
             foreach ($ids as $id) {
+                $existing_tracking = Tracking::where('air_booking_id', $id)->latest()->first();
                 // Create new tracking record
                 Tracking::create([
                     'air_booking_id' => $id,
                     'driver_id' => Auth::id(),
+                    'from_hub_id'    => $existing_tracking->from_hub_id,
+                    'to_hub_id'      =>$existing_tracking->from_hub_id,
+                    'destination_address' => null,
                     'status' => 'received_pickup_pending'
                 ]);
             }
@@ -67,5 +74,92 @@ class PickupController extends Controller
         });
 
         return redirect()->back()->with('message', 'Selected Parcels Were Picked Up.');
+    }
+
+    public function pickupList(){
+        $pickedUps = Tracking::with('driver:id,name','booking:id,invoice_no,spacial_instruction','from_hub:id,address','to_hub:id,address')
+                                    ->where('driver_id', auth()->id())
+                                    ->where('status','received_pickup_pending')
+                                    ->whereNotExists(function ($query) {
+                                            $query->select(DB::raw(1))
+                                                    ->from('trackings as t2')
+                                                    ->whereColumn('t2.air_booking_id', 'trackings.air_booking_id')
+                                                    ->where(function($subquery){
+                                                        $subquery->where('t2.status', '!=', 'pickup_pending')
+                                                                 ->where('t2.status', '!=', 'assign_delivery_man')
+                                                                 ->where('t2.status', '!=', 'received_pickup_pending');
+                                                 });  
+                                            })
+                                    ->get();
+        return view('driver.pages.pickup.pickup_list',compact('pickedUps'));
+    }
+
+    public function deliveredToHub(AirBooking $airBooking){
+        $existing_tracking = Tracking::where('air_booking_id', $airBooking->id)->latest()->first();
+           DB::transaction(function () use ($airBooking, $existing_tracking){
+               $tracking = Tracking::create([
+                   'air_booking_id' => $airBooking->id,
+                   'driver_id'      => Auth::id(),
+                   'from_hub_id'    => $existing_tracking->from_hub_id,
+                   'to_hub_id'      =>$existing_tracking->from_hub_id,
+                   'destination_address' => null,
+                   'status'         => 'delivery_hub'
+               ]);
+
+              $tracking->booking()->update([
+                  'status' => 'delivery_hub'
+              ]);
+              $tracking->load('booking');
+
+              return $tracking;
+          });
+         return redirect()->back()->with('message','Parcel delivered to hub.');
+    }
+
+    public function bulkDeliveredToHub(Request $request){
+        if(empty($request->ids)){
+            return back()->with('warning','Nothing selected.');
+        }
+
+        DB::transaction(function () use ($request) {
+            $ids  = explode(',', $request->ids);
+            foreach ($ids as $id) {
+                $existing_tracking = Tracking::where('air_booking_id', $id)->latest()->first();
+                // Create new tracking record
+                Tracking::create([
+                    'air_booking_id' => $id,
+                    'driver_id' => Auth::id(),
+                    'from_hub_id'    => $existing_tracking->from_hub_id,
+                    'to_hub_id'      =>$existing_tracking->from_hub_id,
+                    'destination_address' => null,
+                    'status' => 'delivery_hub'
+                ]);
+            }
+
+            // Update associated booking statuses
+            AirBooking::whereIn('id', $ids)
+                ->update(['status' => 'delivery_hub']);
+        });
+
+        return redirect()->back()->with('message', 'Selected Parcels Were delivered to hub.');
+    }
+
+    public function deliveredToHubList(){
+        $delivered = Tracking::with('driver:id,name','booking:id,invoice_no,spacial_instruction','from_hub:id,address','to_hub:id,address')
+                                ->where('driver_id', auth()->id())
+                                ->where('status','delivery_hub')
+                                ->whereNotExists(function ($query) {
+                                        $query->select(DB::raw(1))
+                                                ->from('trackings as t2')
+                                                ->whereColumn('t2.air_booking_id', 'trackings.air_booking_id')
+                                                ->where(function($subquery){
+                                                    $subquery->where('t2.status', '!=', 'pickup_pending')
+                                                            ->where('t2.status', '!=', 'assign_delivery_man')
+                                                            ->where('t2.status', '!=', 'received_pickup_pending')
+                                                            ->where('t2.status', '!=', 'delivery_hub');
+                                            });  
+                                        })
+                                ->get();
+        return view('driver.pages.pickup.delivered_to_hub_list',compact('delivered'));
     }
 }

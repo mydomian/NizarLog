@@ -137,7 +137,9 @@
                 </a>
                 <div class="submenu">
                   <ul>
-                      <li class="nav-item"><a class="nav-link" href="{{route('driver.pickup.requests')}}">Requests</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{route('driver.pickup.requests')}}">Pickup Requests</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{route('driver.pickup.list')}}">Picked up List</a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{route('driver.delivered.to.hub.list')}}">Delivered to hub List</a></li>
                   </ul>
                 </div>
             </li>
