@@ -90,7 +90,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin-cod-charge-status/{cod}',[CODChargeController::class,'CODStatus'])->name('admin.COD.status');
 
     //print pages
-    Route::get('air-booking-print',[BookingController::class,'airBillPrint'])->name('admin.airBillPrint');
+    Route::get('air-booking-print/{airBillPrint}',[BookingController::class,'airBillPrint'])->name('admin.airBillPrint');
 
     //ajax
     Route::get('admin-delivery-type-wise-delivery-charge',[DeliveryTypeController::class,'delTypeWiseWeighType'])->name('admin.delivery-type-wise-delivery-charge');

@@ -12,8 +12,8 @@ class AirBooking extends Model
     public function user(){
         return $this->belongsTo(User::class)->with('user_info');
     }
-    public function service_area(){
-        return $this->belongsTo(ServiceArea::class);
+    public function hub(){
+        return $this->belongsTo(Hub::class,'last_destination_id');
     }
     public function area_type(){
         return $this->belongsTo(AreaType::class);

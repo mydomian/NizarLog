@@ -34,23 +34,33 @@ Pickup Pending Lists
         <form action="{{ route('adminListsPickupReceived') }}" method="post">
         @csrf
           <div class="card-body">
-            <div class="row w-50 mb-3">
+            <div class="row mb-3">
 
-                <div class="col-sm-6">
-                    <select id="user_id" class="js-example-basic-single @error('user_id') is-invalid @enderror" name="user_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Select Driver" required>
-                        <option value="">Select Driver</option>
+                    <div class="form-row">
+                      <div class="col">
+                        <select id="driver_id" class="js-example-basic-single @error('driver_id') is-invalid @enderror" name="driver_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Select Driver" required>
+                            <option value="">Select Driver</option>
 
-                        @foreach ($drivers as $driver)
-                            <option value="{{ $driver->id }}">{{ $driver->name }}</option>
-                        @endforeach
-                    </select>
+                            @foreach ($drivers as $driver)
+                                <option value="{{ $driver->id }}">{{ $driver->name }}</option>
+                            @endforeach
+                        </select>
+                      </div>
+                      <div class="col">
+                        <select id="to_hub_id" class="js-example-basic-single @error('to_hub_id') is-invalid @enderror" name="to_hub_id" style="width:100%" data-toggle="tooltip" data-placement="top" title="Select Hub" required>
+                            <option value="">Select Hub</option>
 
-                </div>
-                <div class="col-sm-6 d-flex align-items-center">
+                            @foreach ($hubs as $hub)
+                                <option value="{{ $hub->id }}">{{ $hub->hub_name }} - ({{ $hub->hub_code }} - {{ $hub->hub_parent == null ? 'Parent' :  $hub->hub_parent}})</option>
+                            @endforeach
+                        </select>
+                      </div>
 
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="mdi mdi-plus"></i>Save</button>
+                      <div class="col d-flex align-items-center">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="mdi mdi-plus"></i>Save</button>
+                      </div>
+                    </div>
 
-                </div>
             </div>
             <div class="service-delivery-append">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
@@ -84,7 +94,7 @@ Pickup Pending Lists
                             </td>
                             <td>{{ $airBooking->invoice_no ?? "-" }}</td>
                             <td>{{ $airBooking->user->name ?? "-" }}</td>
-                            <td>{{ $airBooking->service_area->name ?? "-" }}</td>
+                            <td>{{ $airBooking->hub->hub_name ?? "-" }}</td>
                             <td>{{ $airBooking->area_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->parcel_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->delivery_type->type ?? "-" }}</td>
