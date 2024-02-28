@@ -27,4 +27,7 @@ class AirBooking extends Model
     public function delivery_weight_charge(){
         return $this->belongsTo(DeliveryCharge::class,'delivery_charge_id');
     }
+    public function tracking(){
+        return $this->hasMany(Tracking::class,'air_booking_id')->with('driver','fromHub','toHub','booking');
+    }
 }

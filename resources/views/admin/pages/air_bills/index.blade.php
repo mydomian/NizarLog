@@ -31,7 +31,7 @@ Pickup Pending Lists
             <div class="text-center">
                 <h5 class=" mt-3 text-warning">Pickup Pending Lists</h5>
             </div>
-        <form action="{{ route('adminListsPickupReceived') }}" method="post">
+        <form action="{{ route('adminListsAssignDeliveryman') }}" method="post">
         @csrf
           <div class="card-body">
             <div class="row mb-3">
@@ -198,13 +198,7 @@ Pickup Pending Lists
                     });
                 }
             });
-            // var values = function() {
-            //     var a = [];
-            //     $(".checkboxes:checked").each(function() {
-            //         a.push(this.value);
-            //     });
-            //     console.log(a);
-            // };
+
         })
     </script>
 @endpush

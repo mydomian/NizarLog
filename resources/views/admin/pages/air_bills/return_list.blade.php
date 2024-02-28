@@ -26,6 +26,7 @@ Return Lists
                             <th>Invoice</th>
                             <th>Agency</th>
                             <th>Destination</th>
+                            <th>Driver</th>
                             <th>AreaType</th>
                             <th>ParcelType</th>
                             <th>DeliveryType</th>
@@ -42,6 +43,15 @@ Return Lists
                             <td>{{ $airBooking->invoice_no ?? "-" }}</td>
                             <td>{{ $airBooking->user->name ?? "-" }}</td>
                             <td>{{ $airBooking->hub->hub_name ?? "-" }}</td>
+                            <td>
+                                @foreach ($airBooking->tracking as $tracking)
+                                    @if(isset($tracking->driver))
+                                        @if ($loop->last)
+                                            <span class="badge bg-danger">{{ $tracking->driver->name }}</span>
+                                        @endif
+                                    @endif
+                                @endforeach
+                            </td>
                             <td>{{ $airBooking->area_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->parcel_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->delivery_type->type ?? "-" }}</td>
