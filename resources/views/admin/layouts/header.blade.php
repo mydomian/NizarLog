@@ -9,13 +9,10 @@
           </div>
           <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown  d-lg-flex d-none">
-                <button type="button" class="btn btn-inverse-primary btn-sm">Air Bill</button>
+                <a href="{{ route('admin-air-bills.create') }}" class="btn btn-inverse-primary btn-sm">Air Bill</a>
               </li>
               <li class="nav-item dropdown  d-lg-flex d-none">
-                <button type="button" class="btn btn-inverse-primary btn-sm">Client Manage</button>
-              </li>
-              <li class="nav-item dropdown  d-lg-flex d-none">
-                <button type="button" class="btn btn-inverse-primary btn-sm">Tracking</button>
+                <a href="{{ route('adminTracking') }}" class="btn btn-inverse-primary btn-sm">Tracking</a>
               </li>
               <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
@@ -61,14 +58,14 @@
                     <ul>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.create') }}">Air Bill</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('admin-air-bills.index') }}">Lists Pickup Pending</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsAssignDeliveryman') }}">Lists Assign Driver</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('adminListsPickupReceived') }}">Lists Pickup Received</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('adminListsHubStore') }}">Lists Hub Store</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('adminListsTransit') }}">Lists Transit</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('adminListsDelivered') }}">Lists Delivered</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('adminListsReturn') }}">Lists Return</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('adminListsCancel') }}">Lists Cancel</a></li>
 
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminTracking') }}">Tracking</a></li>
                     </ul>
                 </div>
             </li>

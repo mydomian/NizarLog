@@ -15,7 +15,15 @@ class Tracking extends Model
     }
 
     public function booking(){
-        return $this->belongsTo(AirBooking::class,'air_booking_id','id');
+        return $this->belongsTo(AirBooking::class,'air_booking_id','id')->with('user');
+    }
+
+    public function fromHub(){
+        return $this->belongsTo(Hub::class,'from_hub_id','id');
+    }
+
+    public function toHub(){
+        return $this->belongsTo(Hub::class,'to_hub_id','id');
     }
 
     public function from_hub(){

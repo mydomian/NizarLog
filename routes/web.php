@@ -59,13 +59,13 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
     //air bills
     Route::resource('admin-air-bills',BookingController::class);
+    Route::match(['get','post'],'admin-lists-assign-deliveryman',[BookingController::class,'adminListsAssignDeliveryman'])->name('adminListsAssignDeliveryman');
     Route::match(['get','post'],'admin-lists-pickup-received',[BookingController::class,'adminListsPickupReceived'])->name('adminListsPickupReceived');
-    Route::get('admin-lists-hub-store',[BookingController::class,'adminListsHubStore'])->name('adminListsHubStore');
-    Route::get('admin-lists-transit',[BookingController::class,'adminListsTransit'])->name('adminListsTransit');
+    Route::match(['get','post'],'admin-lists-hub-store',[BookingController::class,'adminListsHubStore'])->name('adminListsHubStore');
+    Route::match(['get','post'],'admin-lists-transit',[BookingController::class,'adminListsTransit'])->name('adminListsTransit');
     Route::get('admin-lists-delivered',[BookingController::class,'adminListsDelivered'])->name('adminListsDelivered');
     Route::get('admin-lists-return',[BookingController::class,'adminListsReturn'])->name('adminListsReturn');
-    Route::get('admin-lists-cancel',[BookingController::class,'adminListsCancel'])->name('adminListsCancel');
-
+    Route::match(['get','post'],'admin-tracking',[BookingController::class,'adminTracking'])->name('adminTracking');
 
     //area-types
     Route::resource('admin-area-types',AreaTypeController::class);
@@ -108,7 +108,7 @@ Route::prefix('agency')->middleware(['auth', 'agency'])->group(function () {
     Route::get('/dashboard',[AgencyDashboardController::class,'dashboard'])->name('agency.dashboard');
     Route::get('agency-logout',[AgencyDashboardController::class,'logout'])->name('agency.logout');
 
-    Route::match(['get','post'],'agency/profile',[AgencySettingController::class,'setting'])->name('agency.settings'); 
+    Route::match(['get','post'],'agency/profile',[AgencySettingController::class,'setting'])->name('agency.settings');
     Route::post('/agency-password-confirm',[AgencySettingController::class,'checkPassword'])->name('agency.password.confirm');
     Route::post('/agency-password-update',[AgencySettingController::class,'updatePassword'])->name('agency.password.update');
     Route::get('/agency-cancel-change-password',[AgencySettingController::class,'cancel'])->name('agency.cancel.change.password');
