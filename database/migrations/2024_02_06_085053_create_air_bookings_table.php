@@ -34,7 +34,7 @@ return new class extends Migration
             $table->float('delivery_charge');
             $table->longText('spacial_instruction');
             $table->dateTime('date_time');
-            $table->enum('status',['pickup_pending','assign_delivery_man','received_pickup_pending','delivery_hub','transit','return'])->default('pickup_pending');
+            $table->enum('status',['pickup_pending','assign_delivery_man','received_pickup_pending','delivery_hub','transit','delivery','return'])->default('pickup_pending');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

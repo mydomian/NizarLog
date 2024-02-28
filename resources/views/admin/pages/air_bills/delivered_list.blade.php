@@ -26,6 +26,7 @@ Transit Lists
                             <th>Invoice</th>
                             <th>Agency</th>
                             <th>Destination</th>
+                            <th>Driver</th>
                             <th>AreaType</th>
                             <th>ParcelType</th>
                             <th>DeliveryType</th>
@@ -42,6 +43,15 @@ Transit Lists
                             <td>{{ $airBooking->invoice_no ?? "-" }}</td>
                             <td>{{ $airBooking->user->name ?? "-" }}</td>
                             <td>{{ $airBooking->hub->hub_name ?? "-" }}</td>
+                            <td>
+                                @foreach ($airBooking->tracking as $tracking)
+                                    @if(isset($tracking->driver))
+                                        @if ($loop->last)
+                                            <span class="badge bg-danger">{{ $tracking->driver->name }}</span>
+                                        @endif
+                                    @endif
+                                @endforeach
+                            </td>
                             <td>{{ $airBooking->area_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->parcel_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->delivery_type->type ?? "-" }}</td>
@@ -49,9 +59,9 @@ Transit Lists
                             <td>{{ $airBooking->delivery_weight_charge->delivery_charge ?? "-" }}</td>
                             <td><span class="badge badge-info">{{ $airBooking->status }}</span></td>
                             <td>
-                                <a href="{{ route('admin-air-bills.edit',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
+                                {{-- <a href="{{ route('admin-air-bills.edit',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="mdi mdi-pencil-box-outline"></i>
-                                </a>
+                                </a> --}}
                                 <a href="{{ route('admin-air-bills.show',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Show">
                                     <i class="mdi mdi-eye"></i>
                                 </a>

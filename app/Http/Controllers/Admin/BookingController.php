@@ -31,39 +31,114 @@ class BookingController extends Controller
         return view('admin.pages.air_bills.index',compact('airBookings','drivers','hubs'));
     }
 
-    public function adminListsPickupReceived(Request $request){
+    public function adminListsAssignDeliveryman(Request $request){
         if($request->isMethod('post')){
 
             foreach($request->ids as $bookingId){
 
                 $airBooking = AirBooking::find($bookingId);
-                $airBooking->status = 'received_pickup_pending';
+                $airBooking->status = 'assign_delivery_man';
                 $airBooking->save();
-
 
                 $tracking = new Tracking;
                 $tracking->air_booking_id = $bookingId;
                 $tracking->driver_id = $request->driver_id;
-                $tracking->from_hub_id = $request->user_id;
+                $tracking->from_hub_id = null;
+                $tracking->to_hub_id = $request->to_hub_id;
+                $tracking->status = 'assign_delivery_man';
+                $tracking->save();
             }
         }
-        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'received_pickup_pending'])->latest()->paginate(50);
-        return view('admin.pages.air_bills.pickup_received',compact('airBookings'));
+        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge','tracking')->where(['status'=>'assign_delivery_man'])->latest()->paginate(50);
+        $drivers = User::where(['login_type'=>'driver','status'=>'active'])->get();
+        $hubs = Hub::where(['status'=>'active'])->get();
+
+        return view('admin.pages.air_bills.asign_deliveryman',compact('airBookings','drivers','hubs'));
+    }
+
+    public function adminListsPickupReceived(){
+
+        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge','tracking')->where(['status'=>'received_pickup_pending'])->latest()->paginate(50);
+        $drivers = User::where(['login_type'=>'driver','status'=>'active'])->get();
+        $hubs = Hub::where(['status'=>'active'])->get();
+
+        return view('admin.pages.air_bills.receive_pickup_pending',compact('airBookings','drivers','hubs'));
     }
 
     public function adminListsHubStore(Request $request){
+        if($request->isMethod('post')){
 
-        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'received_delivery_hub'])->latest()->paginate(50);
-        return view('admin.pages.air_bills.hub_store',compact('airBookings'));
+            foreach($request->ids as $bookingId){
+
+                $airBooking = AirBooking::find($bookingId);
+                $airBooking->status = 'transit';
+                $airBooking->save();
+
+                $trackingLast = Tracking::where(['air_booking_id'=>$airBooking->id])->latest()->first();
+                $tracking = new Tracking;
+                $tracking->air_booking_id = $bookingId;
+                $tracking->driver_id = $request->driver_id;
+                $tracking->from_hub_id = $trackingLast->to_hub_id;
+                $tracking->to_hub_id = $request->to_hub_id;
+                $tracking->status = 'transit';
+                $tracking->save();
+            }
+        }
+        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'delivery_hub'])->latest()->paginate(50);
+        $drivers = User::where(['login_type'=>'driver','status'=>'active'])->get();
+        $hubs = Hub::where(['status'=>'active'])->get();
+        return view('admin.pages.air_bills.hub_store',compact('airBookings','drivers','hubs'));
     }
 
     public function adminListsTransit(Request $request){
-        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'in_transit'])->latest()->paginate(50);
-        return view('admin.pages.air_bills.transit_list',compact('airBookings'));
+        if($request->isMethod('post')){
+
+            if($request->type == 'transit'){
+                if(!isset($request->to_hub_id)){
+                    return back()->withError('Select Hub');
+                }
+
+                foreach($request->ids as $bookingId){
+                    $airBooking = AirBooking::find($bookingId);
+                    $airBooking->status = 'transit';
+                    $airBooking->save();
+
+                    $trackingLast = Tracking::where(['air_booking_id'=>$airBooking->id])->latest()->first();
+                    $tracking = new Tracking;
+                    $tracking->air_booking_id = $bookingId;
+                    $tracking->driver_id = $request->driver_id;
+                    $tracking->from_hub_id = $trackingLast->to_hub_id;
+                    $tracking->to_hub_id = $request->to_hub_id;
+                    $tracking->status = 'transit';
+                    $tracking->save();
+                }
+            }elseif($request->type == 'delivery'){
+
+                foreach($request->ids as $bookingId){
+                    $airBooking = AirBooking::find($bookingId);
+                    $airBooking->status = 'delivery';
+                    $airBooking->save();
+
+                    $trackingLast = Tracking::where(['air_booking_id'=>$airBooking->id])->latest()->first();
+                    $tracking = new Tracking;
+                    $tracking->air_booking_id = $bookingId;
+                    $tracking->driver_id = $request->driver_id;
+                    $tracking->from_hub_id = null;
+                    $tracking->to_hub_id = null;
+                    $tracking->status = 'delivery';
+                    $tracking->save();
+                }
+            }
+
+        }
+        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'transit'])->latest()->paginate(50);
+        $drivers = User::where(['login_type'=>'driver','status'=>'active'])->get();
+        $hubs = Hub::where(['status'=>'active'])->get();
+        return view('admin.pages.air_bills.transit_list',compact('airBookings','hubs','drivers'));
     }
 
     public function adminListsDelivered(Request $request){
-        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'delivered'])->latest()->paginate(50);
+        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'delivery'])->latest()->paginate(50);
         return view('admin.pages.air_bills.delivered_list',compact('airBookings'));
     }
 
@@ -72,10 +147,7 @@ class BookingController extends Controller
         return view('admin.pages.air_bills.return_list',compact('airBookings'));
     }
 
-    public function adminListsCancel(Request $request){
-        $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'cancel'])->latest()->paginate(50);
-        return view('admin.pages.air_bills.cancel_list',compact('airBookings'));
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -176,6 +248,21 @@ class BookingController extends Controller
     public function airBillPrint($airBillId){
         $airBill = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->find($airBillId);
         return view('admin.pages.print.air_bill_booking',compact('airBill'));
+    }
+
+    public function adminTracking(Request $request){
+        if($request->isMethod('post')){
+            $airBooking = AirBooking::with('tracking','user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['invoice_no'=>$request->invoice_no])->first();
+            if($airBooking){
+// return $airBooking;
+                return view('admin.pages.air_bills.tracking',compact('airBooking'));
+
+
+            }else{
+                return back()->withError('Tracking Not Found');
+            }
+        }
+        return view('admin.pages.air_bills.tracking');
     }
 
 
