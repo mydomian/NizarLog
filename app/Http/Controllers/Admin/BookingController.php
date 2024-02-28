@@ -37,14 +37,14 @@ class BookingController extends Controller
             foreach($request->ids as $bookingId){
 
                 $airBooking = AirBooking::find($bookingId);
-                $airBooking->status = 'transit';
+                $airBooking->status = 'received_pickup_pending';
                 $airBooking->save();
 
 
                 $tracking = new Tracking;
                 $tracking->air_booking_id = $bookingId;
-                $tracking->driver_id = $request->user_id;
-                // $tracking->from_hub_id = $request->user_id;
+                $tracking->driver_id = $request->driver_id;
+                $tracking->from_hub_id = $request->user_id;
             }
         }
         $airBookings = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['status'=>'received_pickup_pending'])->latest()->paginate(50);

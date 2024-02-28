@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('from_hub_id')->nullable();
             $table->unsignedBigInteger('to_hub_id')->nullable();
             $table->string('destination_address')->nullable();
-            $table->enum('status',['pickup_pending','received_pickup_pending','delivery_hub','transit','return']);
+            $table->enum('status',['pickup_pending','assign_delivery_man','received_pickup_pending','delivery_hub','transit','return']);
             $table->timestamps();
 
             $table->foreign('air_booking_id')->references('id')->on('air_bookings')->onUpdate('cascade')->onDelete('cascade');
