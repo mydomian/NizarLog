@@ -41,7 +41,7 @@ Pickup Received Lists
                             <td>{{$loop->iteration}}</td>
                             <td>{{ $airBooking->invoice_no ?? "-" }}</td>
                             <td>{{ $airBooking->user->name ?? "-" }}</td>
-                            <td>{{ $airBooking->service_area->name ?? "-" }}</td>
+                            <td>{{ $airBooking->hub->hub_name ?? "-" }}</td>
                             <td>{{ $airBooking->area_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->parcel_type->type ?? "-" }}</td>
                             <td>{{ $airBooking->delivery_type->type ?? "-" }}</td>

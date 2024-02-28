@@ -9,14 +9,15 @@ Booking Show
 
 <div class="content-wrapper">
     <div class="row d-flex justify-content-center">
-      <div class="col-md-12">
+      <div class="col-md-7">
         <div class="card">
-            <div class="text-center">
-                <h5 class=" mt-3 text-warning">Booking Show</h5>
-            </div>
-          <div class="card-body">
 
-            <div class="service-delivery-append">
+          <div class="card-body">
+            <div class="text-center d-flex justify-content-between">
+                <h5 class="mt-3 text-warning">Booking Show</h5>
+                <a href="{{ route('admin-air-bills.index') }}" class="mt-3 btn btn-primary text-warning"><i class="mdi mdi-arrow-left-bold"></i> Booking Lists</a>
+            </div>
+            <div class="service-delivery-append mt-3">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                     <tr>
                         <th>Invoice No</th>
@@ -28,7 +29,7 @@ Booking Show
                     </tr>
                     <tr>
                         <th>Destination</th>
-                        <td>{{ $airBill->service_area->name ?? '-' }}</td>
+                        <td>{{ $airBill->hub->hub_name ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Area Type</th>
