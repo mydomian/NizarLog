@@ -74,11 +74,12 @@ Recevied Pickup Pending Lists
                             <td>{{ $airBooking->delivery_weight_charge->delivery_charge ?? "-" }}</td>
                             <td><span class="badge badge-info">{{ $airBooking->status }}</span></td>
                             <td>
-                                {{-- <a href="{{ route('admin-air-bills.edit',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
-                                    <i class="mdi mdi-pencil-box-outline"></i>
-                                </a> --}}
+
                                 <a href="{{ route('admin-air-bills.show',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Show">
                                     <i class="mdi mdi-eye"></i>
+                                </a>
+                                <a href="{{ route('admin.airBillPrint',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Print">
+                                    <i class="mdi mdi-cloud-print"></i>
                                 </a>
 
                             </td>

@@ -37,9 +37,9 @@ use App\Models\AirBooking;
 
 
 
-Route::get('/', function () {
-    return redirect()->route('admin.login');
-});
+Route::get('/', function () { return redirect()->route('admin.login');});
+Route::get('/admin', function () { return redirect()->route('admin.login');});
+Route::get('/login', function () { return redirect()->route('admin.login');});
 
 Route::match(['get','post'],'/admin/login',[AuthController::class,'adminLogin'])->name('admin.login');
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {

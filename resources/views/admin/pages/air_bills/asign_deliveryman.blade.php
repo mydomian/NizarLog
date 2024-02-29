@@ -6,7 +6,21 @@ Assign Deliveryman Lists
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container .select2-selection--single {
+            height: 44px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 39px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 41px;
+        }
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #FCD53B;
+        }
+    </style>
 @endpush
 @section('content')
 
@@ -60,11 +74,13 @@ Assign Deliveryman Lists
                             <td>{{ $airBooking->delivery_weight_charge->delivery_charge ?? "-" }}</td>
                             <td><span class="badge badge-info">{{ $airBooking->status }}</span></td>
                             <td>
-                                {{-- <a href="{{ route('admin-air-bills.edit',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Edit">
-                                    <i class="mdi mdi-pencil-box-outline"></i>
-                                </a> --}}
+
                                 <a href="{{ route('admin-air-bills.show',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Show">
                                     <i class="mdi mdi-eye"></i>
+                                </a>
+
+                                <a href="{{ route('admin.airBillPrint',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Print">
+                                    <i class="mdi mdi-cloud-print"></i>
                                 </a>
 
                             </td>
@@ -134,7 +150,7 @@ Assign Deliveryman Lists
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function(){
 
