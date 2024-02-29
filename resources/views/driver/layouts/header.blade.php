@@ -15,7 +15,7 @@
                 <button type="button" class="btn btn-inverse-primary btn-sm">Client Manage</button>
               </li> --}}
               <li class="nav-item dropdown  d-lg-flex d-none">
-                <button type="button" class="btn btn-inverse-primary btn-sm">Tracking</button>
+                <a href="{{route('driver.tracking')}}" class="btn btn-inverse-primary btn-sm">Tracking</a>
               </li>
               <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">

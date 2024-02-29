@@ -1,3 +1,4 @@
+{{ session()->forget('print') }}
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,7 +20,6 @@
 </head>
 
 <body>
-
     <div align="center">
         <table width="1000" border="0" cellspacing="0" cellpadding="0">
             <tr>

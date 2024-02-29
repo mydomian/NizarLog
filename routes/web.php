@@ -118,6 +118,7 @@ Route::prefix('agency')->middleware(['auth', 'agency'])->group(function () {
     Route::get('agency-delivery-type-wise-delivery-charge',[AgencyAirBillController::class,'delTypeWiseWeighType'])->name('agency.delivery-type-wise-delivery-charge');
     Route::get('agency-delivery-charge-wise-cod-charge',[AgencyAirBillController::class,'delTypeWiseCodCharge'])->name('agency.delivery-charge-wise-cod-charge');
     Route::get('cod-charge-agency',[AgencyAirBillController::class,'CodCharge'])->name('agency.cod-charge');
+    Route::match(['get','post'],'agency-tracking',[AgencyAirBillController::class,'tracking'])->name('agency.tracking');
 
 
     Route::get('agency-air-booking-print/{airBillPrint}',[AgencyAirBillController::class,'airBillPrint'])->name('agency.airBillPrint');
@@ -136,6 +137,7 @@ Route::prefix('driver')->middleware(['auth', 'driver'])->group(function () {
     Route::get('parcel-delivered-to-hub/{air_booking}',[DriverPickupController::class,'deliveredToHub'])->name('parcel.delivered.to.hub');
     Route::get('bulk-parcel-picked-up',[DriverPickupController::class,'bulkPickedUp'])->name('bulk.parcel.picked.up');
     Route::get('bulk-parcel-delivered-to-hub',[DriverPickupController::class,'bulkDeliveredToHub'])->name('bulk.parcel.delivered.to.hub');
+    Route::match(['get','post'],'driver-tracking',[DriverPickupController::class,'tracking'])->name('driver.tracking');
 
     Route::match(['get','post'],'profile-settings',[DriverSettingController::class,'settings'])->name('driver.settings');
     Route::post('/password-confirm',[DriverSettingController::class,'checkPassword'])->name('driver.password.confirm');

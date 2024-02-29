@@ -13,6 +13,7 @@ use App\Models\ParcelType;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AirBillController extends Controller
 {
@@ -21,7 +22,8 @@ class AirBillController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = AirBooking::where('user_id', Auth::id())->latest()->get();
+        return view('agency.pages.air_bill.lists',compact('bookings'));
     }
 
     /**
@@ -40,7 +42,7 @@ class AirBillController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         $deliveryCharge = DeliveryCharge::find($request->delivery_charge_id);
         $codCharge = CodCharge::where('type','desk_booking')->latest()->first();
         $lastBooking = AirBooking::latest()->first();
@@ -83,8 +85,9 @@ class AirBillController extends Controller
             $tracking->status = 'pickup_pending';
             $tracking->save();
         }
-
-        return redirect()->route('agency.airBillPrint',$airBooking->id);
+        Session::put('print', route('agency.airBillPrint',$airBooking->id));
+        return redirect()->route('agency-air-bill.create')->with('success','Booking created!');
+        // return redirect()->route('agency-air-bill.create', ['urlToOpen' => $urlToOpen])->with('success', 'Booking stored successfully.');
     }
 
     /**
@@ -92,7 +95,8 @@ class AirBillController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $airBill = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->find($id);
+        return view('agency.pages.air_bill.show',compact('airBill'));
     }
 
     /**
@@ -149,4 +153,19 @@ class AirBillController extends Controller
         $airBill = AirBooking::with('user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->find($airBillId);
         return view('agency.pages.print.air_bill_booking',compact('airBill'));
     }
+
+    
+    public function tracking(Request $request){
+
+        if($request->isMethod('post')){
+            $airBooking = AirBooking::with('tracking','user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['invoice_no'=>$request->invoice_no])->first();
+            if($airBooking){
+                return view('agency.pages.air_bill.tracking',compact('airBooking'));
+            }else{
+                return back()->withError('Tracking Not Found');
+            }
+        }
+        return view('agency.pages.air_bill.tracking');
+    }
+    
 }

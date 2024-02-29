@@ -15,7 +15,7 @@
                 <button type="button" class="btn btn-inverse-primary btn-sm">Client Manage</button>
               </li>
               <li class="nav-item dropdown  d-lg-flex d-none">
-                <button type="button" class="btn btn-inverse-primary btn-sm">Tracking</button>
+                <a href="{{route('agency.tracking')}}" class="btn btn-outline-primary btn-sm">Tracking</a>
               </li>
               <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
@@ -60,14 +60,14 @@
                 <div class="submenu">
                     <ul>
                         <li class="nav-item"><a class="nav-link" href="{{route('agency-air-bill.create')}}">Air Bill</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Lists</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Status</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('agency-air-bill.index') }}">Booking List</a></li>
+                        {{-- <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Status</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li> --}}
                     </ul>
                 </div>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a href="" class="nav-link text-warning">
                 <i class="mdi mdi-account-key menu-icon"></i>
                 <span class="menu-title">Client</span>
@@ -120,7 +120,7 @@
                       <li class="nav-item"><a class="nav-link" href="">Payment</a></li>
                   </ul>
               </div>
-          </li>
+          </li> 
 
             <li class="nav-item">
               <a href="{{ url('/sample-pages') }}" class="nav-link text-warning">
@@ -128,7 +128,7 @@
                 <span class="menu-title">Reports</span>
                 <i class="menu-arrow"></i>
               </a>
-          </li>
+          </li> --}}
             <li class="nav-item">
                 <a href="{{ route('agency.settings') }}" class="nav-link text-warning">
                   <i class="mdi mdi-settings menu-icon"></i>
