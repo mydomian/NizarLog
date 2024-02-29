@@ -162,4 +162,17 @@ class PickupController extends Controller
                                 ->get();
         return view('driver.pages.pickup.delivered_to_hub_list',compact('delivered'));
     }
+
+    public function tracking(Request $request){
+
+        if($request->isMethod('post')){
+            $airBooking = AirBooking::with('tracking','user','hub','area_type','parcel_type','delivery_type','delivery_weight_charge')->where(['invoice_no'=>$request->invoice_no])->first();
+            if($airBooking){
+                return view('driver.pages.pickup.tracking',compact('airBooking'));
+            }else{
+                return back()->withError('Tracking Not Found');
+            }
+        }
+        return view('driver.pages.pickup.tracking');
+    }
 }

@@ -38,7 +38,7 @@ class BookingController extends Controller
                 $airBooking = AirBooking::find($bookingId);
                 $airBooking->status = 'assign_delivery_man';
                 $airBooking->save();
-
+ 
                 $tracking = new Tracking;
                 $tracking->air_booking_id = $bookingId;
                 $tracking->driver_id = $request->driver_id;

@@ -249,13 +249,13 @@ Air Bill Generate
 
     });
 </script>
-{{-- <script>
-  @if (session()->has('print'))
-    $(document).ready(function(){
-      var airbooking = {{session()->get('print')}}
-      var url = "agency-air-booking-print/"+airbooking;
-      window.location = window.open(url, "_blank");
-    })
-  @endif
-</script> --}}
+@if(session()->has('print'))
+  <script>
+      let url = "{{session()->get('print')}}";
+      function myFunction() {
+                  window.open(url);
+                }
+      myFunction();
+  </script>
+@endif
 @endpush
