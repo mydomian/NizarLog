@@ -30,7 +30,7 @@
                         <tbody>
                             <tr>
                                 <td align="center" valign="middle">
-                                    <table width="100%" height="100" border="0" cellpadding="0" cellspacing="0"
+                                    <table width="100%" height="100px" border="0" cellpadding="0" cellspacing="0"
                                         style="border-bottom:1px solid #f3732e;">
                                         <tr>
                                             <td width="350" align="left" valign="middle">
@@ -63,30 +63,37 @@
                                                 Booking Date : {{ $airBill->date_time }}</td>
                                             <td align="center" valign="middle">
 
-                                                   @if ($airBill->delivery_type_id == 1)
-                                                    Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(48) }}
-                                                   @elseif ($airBill->delivery_type_id == 2)
-                                                    Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(24) }}
+
+
+                                                   @if ($airBill->status == 'return')
+                                                        Return Date : {{ $airBill->updated_at }}
+                                                   @else
+                                                        @if ($airBill->delivery_type_id == 1)
+                                                        Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(48) }}
+                                                        @elseif ($airBill->delivery_type_id == 2)
+                                                        Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(24) }}
+                                                        @endif
                                                    @endif
 
                                             </td>
                                         </tr>
 
-                                        {{-- <tr>
-                                            <td width="250" height="50" align="left" valign="middle">
+                                        @if ($airBill->status == 'return')
+                                            <tr>
+                                                <td width="250" height="50" align="left" valign="middle">
 
-                                            </td>
-                                            <td align="center" valign="middle">
+                                                </td>
+                                                <td align="center" valign="middle">
 
-                                            </td>
-                                            <td align="center" valign="middle">
+                                                </td>
+                                                <td align="center" valign="middle">
 
-                                                Booking Status
-                                                Return Reson
+                                                    {{ ucfirst($airBill->status) }}
+                                                    {{ $airBill->return_reson ?? '' }}
 
-                                            </td>
-                                        </tr> --}}
-
+                                                </td>
+                                            </tr>
+                                        @endif
 
                                         <tr>
                                             <td height="80" align="left" valign="middle">
@@ -214,29 +221,35 @@
                                             <td align="center" valign="middle">
 
 
-                                                   @if ($airBill->delivery_type_id == 1)
-                                                   Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(48) }}
-                                                  @elseif ($airBill->delivery_type_id == 2)
-                                                   Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(24) }}
-                                                  @endif
+                                                @if ($airBill->status == 'return')
+                                                        Return Date : {{ $airBill->updated_at }}
+                                                @else
+                                                    @if ($airBill->delivery_type_id == 1)
+                                                    Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(48) }}
+                                                    @elseif ($airBill->delivery_type_id == 2)
+                                                    Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(24) }}
+                                                    @endif
+                                                @endif
 
                                             </td>
                                         </tr>
 
-                                        {{-- <tr>
-                                            <td width="250" height="50" align="left" valign="middle">
+                                        @if ($airBill->status == 'return')
+                                            <tr>
+                                                <td width="250" height="50" align="left" valign="middle">
 
-                                            </td>
-                                            <td align="center" valign="middle">
+                                                </td>
+                                                <td align="center" valign="middle">
 
-                                            </td>
-                                            <td align="center" valign="middle">
+                                                </td>
+                                                <td align="center" valign="middle">
 
-                                                Booking Status
-                                                Return Reson
+                                                    {{ ucfirst($airBill->status) }}
+                                                    {{ $airBill->return_reson ?? '' }}
 
-                                            </td>
-                                        </tr> --}}
+                                                </td>
+                                            </tr>
+                                        @endif
 
 
                                         <tr>
@@ -364,29 +377,35 @@
                                             <td align="center" valign="middle">
 
 
-                                                   @if ($airBill->delivery_type_id == 1)
-                                                   Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(48) }}
-                                                  @elseif ($airBill->delivery_type_id == 2)
-                                                   Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(24) }}
-                                                  @endif
+                                                @if ($airBill->status == 'return')
+                                                    Return Date : {{ $airBill->updated_at }}
+                                                @else
+                                                    @if ($airBill->delivery_type_id == 1)
+                                                    Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(48) }}
+                                                    @elseif ($airBill->delivery_type_id == 2)
+                                                    Delivery Date : {{ Carbon\Carbon::parse($airBill->date_time)->addHour(24) }}
+                                                    @endif
+                                                @endif
 
                                             </td>
                                         </tr>
 
-                                        {{-- <tr>
-                                            <td width="250" height="50" align="left" valign="middle">
+                                        @if ($airBill->status == 'return')
+                                            <tr>
+                                                <td width="250" height="50" align="left" valign="middle">
 
-                                            </td>
-                                            <td align="center" valign="middle">
+                                                </td>
+                                                <td align="center" valign="middle">
 
-                                            </td>
-                                            <td align="center" valign="middle">
+                                                </td>
+                                                <td align="center" valign="middle">
 
-                                                Booking Status
-                                                Return Reson
+                                                    {{ ucfirst($airBill->status) }}
+                                                    {{ $airBill->return_reson ?? '' }}
 
-                                            </td>
-                                        </tr> --}}
+                                                </td>
+                                            </tr>
+                                        @endif
 
 
                                         <tr>

@@ -108,6 +108,9 @@ Pickup Pending Lists
                                 <a href="{{ route('admin-air-bills.show',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Show">
                                     <i class="mdi mdi-eye"></i>
                                 </a>
+                                <a href="{{ route('admin.airBillPrint',$airBooking->id) }}" type="button" class="btn btn-sm btn-primary btn-icon-text" data-toggle="tooltip" data-placement="top" title="Print">
+                                    <i class="mdi mdi-cloud-print"></i>
+                                </a>
 
                             </td>
                         </tr>

@@ -33,6 +33,7 @@ return new class extends Migration
             $table->float('cod_charge');
             $table->float('delivery_charge');
             $table->longText('spacial_instruction');
+            $table->longText('return_reson')->nullable();
             $table->dateTime('date_time');
             $table->enum('status',['pickup_pending','assign_delivery_man','received_pickup_pending','delivery_hub','transit','delivery','return'])->default('pickup_pending');
             $table->timestamps();

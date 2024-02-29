@@ -15,7 +15,7 @@ Booking Show
           <div class="card-body">
             <div class="text-center d-flex justify-content-between">
                 <h5 class="mt-3 text-warning">Booking Show</h5>
-                <a href="{{ route('admin-air-bills.index') }}" class="mt-3 btn btn-primary text-warning"><i class="mdi mdi-arrow-left-bold"></i> Booking Lists</a>
+                <a href="{{ url()->previous() }}" class="mt-3 btn btn-primary text-warning"><i class="mdi mdi-arrow-left-bold"></i>Back</a>
             </div>
             <div class="service-delivery-append mt-3">
                 <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
@@ -108,6 +108,13 @@ Booking Show
                         <th>Staus</th>
                         <td>Pickup Pending</td>
                     </tr>
+                    @if ($airBill->status == 'return')
+                        <tr class="bg-danger">
+                            <th>Return Reson</th>
+                            <td>{{ $airBill->return_reson ?? '' }}</td>
+                        </tr>
+                    @endif
+
                 </table>
             </div>
           </div>
