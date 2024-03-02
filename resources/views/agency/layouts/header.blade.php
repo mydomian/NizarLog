@@ -46,7 +46,7 @@
       <div class="container">
           <ul class="nav page-navigation">
             <li class="nav-item">
-              <a class="nav-link text-warning" href="">
+              <a class="nav-link text-warning" href="{{route('agency.dashboard')}}">
                 <i class="mdi mdi-file-document-box menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
@@ -61,6 +61,7 @@
                     <ul>
                         <li class="nav-item"><a class="nav-link" href="{{route('agency-air-bill.create')}}">Air Bill</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('agency-air-bill.index') }}">Booking List</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('agency-air-bill.transit.receive') }}">Transit Receive</a></li>
                         {{-- <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Status</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ url('/ui-elements') }}">Tracking</a></li> --}}
                     </ul>
