@@ -31,6 +31,6 @@ class Tracking extends Model
     }
 
     public function to_hub(){
-        return $this->belongsTo(UserInfo::class,'to_hub_id','id');
+        return $this->belongsTo(UserInfo::class,'to_hub_id','user_id');
     }
 }

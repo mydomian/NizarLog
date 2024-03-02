@@ -143,6 +143,17 @@
                   </ul>
                 </div>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-warning">
+                <i class="mdi mdi-truck menu-icon"></i>
+                <span class="menu-title">Transit Delivery</span>
+              </a>
+              <div class="submenu">
+                <ul>
+                    <li class="nav-item"><a class="nav-link" href="{{route('driver.delivery.requests')}}">Transit Delivery Requests</a></li>
+                </ul>
+              </div>
+          </li>
           <li class="nav-item">
               <a href="{{ route('driver.settings') }}" class="nav-link text-warning">
                   <i class="mdi mdi-settings menu-icon"></i>

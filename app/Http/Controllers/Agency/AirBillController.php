@@ -167,5 +167,24 @@ class AirBillController extends Controller
         }
         return view('agency.pages.air_bill.tracking');
     }
+
+
+    public function transitReceive(){
+        $transit_receives = Tracking::with('booking.hub')->where('to_hub_id', auth()->id())->where('status','transit_delivered')->get();
+        return view('agency.pages.transit.receive', compact('transit_receives'));
+    }
+
+    public function confirmReceivedTransit(AirBooking $airBooking){
+        $existing_tracking = Tracking::where('air_booking_id', $airBooking->id)->latest()->first();       
+        $tracking = Tracking::create([
+            'air_booking_id' => $airBooking->id,
+            'driver_id'      => Auth::id(),
+            'from_hub_id'    => $existing_tracking->from_hub_id,
+            'to_hub_id'      =>$existing_tracking->to_hub_id,
+            'destination_address' => null,
+            'status'         => 'transit_received'
+        ]);
+    return redirect()->back()->with('message','Transit receive confirmed.');
+    }
     
 }

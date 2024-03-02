@@ -29,3 +29,7 @@ function totalPickupRequest(){
     return Tracking::where('driver_id', auth()->id())
                     ->where('status','assign_delivery_man')->count();
 }
+
+function isReceived($id){
+    return Tracking::where('air_booking_id', $id)->where('status','transit_received')->exists();
+}
