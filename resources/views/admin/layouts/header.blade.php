@@ -8,6 +8,9 @@
               <a class="navbar-brand brand-logo-mini" href=""><img style="width:64px;height:64px;" src="{{ asset('/storage') }}/{{settings()->logo}}" alt="logo"/></a>
           </div>
           <ul class="navbar-nav navbar-nav-right">
+
+            <div class="gtranslate_wrapper"></div>
+
               <li class="nav-item dropdown  d-lg-flex d-none">
                 <a href="{{ route('admin-air-bills.create') }}" class="btn btn-inverse-primary btn-sm">Air Bill</a>
               </li>

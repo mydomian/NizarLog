@@ -2,6 +2,9 @@
 @section('title')
 Dashboard
 @endsection
+@push('admin-links-css')
+
+@endpush
 @section('content')
 <div class="content-wrapper">
     <div class="row">
@@ -125,3 +128,7 @@ Dashboard
     </div> --}}
 </div>
 @endsection
+
+@push('admin-scripts')
+
+@endpush
