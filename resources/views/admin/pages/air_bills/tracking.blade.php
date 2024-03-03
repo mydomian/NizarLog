@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    Return Lists
+    Tracking
 @endsection
 @push('admin-links-css')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -459,6 +459,36 @@
 
                                                     <div class="cd-timeline-content">
                                                         <h2>In Transit</h2>
+                                                        <h6>Driver Name: {{ $tracking->driver->name ?? '' }}</h6>
+                                                        <p>From: {{ $tracking->fromHub->hub_name ?? '' }} ({{ $tracking->fromHub->hub_code ?? '' }})<br>
+                                                            To: {{ $tracking->toHub->hub_name ?? '' }} ({{ $tracking->toHub->hub_code ?? '' }})
+                                                            </p>
+                                                        <span class="cd-date" style="color:chocolate">{{ $tracking->created_at }} </span>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if ($tracking->status == 'transit_delivered')
+                                                <div class="cd-timeline-block">
+                                                    <div class="cd-timeline-img cd-picture">
+                                                    </div>
+
+                                                    <div class="cd-timeline-content">
+                                                        <h2>Transit Delivered In {{ $tracking->toHub->hub_name ?? '' }}</h2>
+                                                        <h6>Driver Name: {{ $tracking->driver->name ?? '' }}</h6>
+                                                        <p>From: {{ $tracking->fromHub->hub_name ?? '' }} ({{ $tracking->fromHub->hub_code ?? '' }})<br>
+                                                            To: {{ $tracking->toHub->hub_name ?? '' }} ({{ $tracking->toHub->hub_code ?? '' }})
+                                                            </p>
+                                                        <span class="cd-date" style="color:chocolate">{{ $tracking->created_at }} </span>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if ($tracking->status == 'transit_received')
+                                                <div class="cd-timeline-block">
+                                                    <div class="cd-timeline-img cd-picture">
+                                                    </div>
+
+                                                    <div class="cd-timeline-content">
+                                                        <h2>Transit Received By {{ $tracking->toHub->hub_name ?? '' }}</h2>
                                                         <h6>Driver Name: {{ $tracking->driver->name ?? '' }}</h6>
                                                         <p>From: {{ $tracking->fromHub->hub_name ?? '' }} ({{ $tracking->fromHub->hub_code ?? '' }})<br>
                                                             To: {{ $tracking->toHub->hub_name ?? '' }} ({{ $tracking->toHub->hub_code ?? '' }})

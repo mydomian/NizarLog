@@ -60,7 +60,7 @@ Driver Edit
                         <select class="js-example-basic-single @error('service_area') is-invalid @enderror" name="service_area" style="width:100%" data-toggle="tooltip" data-placement="top" title="Service Area" required>
                             <option value="">Select Area</option>
                             @foreach ($areas as $area)
-                                <option value="{{ $area->name }}" @if($area->name == $driver->user_info->service_area) selected @endif>{{ $area->name }}</option>
+                            <option value="{{ $area->hub_name }}" @if($area->hub_name == $driver->user_info->service_area) selected @endif>{{ $area->hub_name }} ({{ $area->hub_code }})</option>
                             @endforeach
                         </select>
                       </div>

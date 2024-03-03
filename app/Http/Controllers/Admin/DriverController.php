@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Services\Services;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Hub;
 use App\Models\ServiceArea;
 use App\Models\UserInfo;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class DriverController extends Controller
      */
     public function create()
     {
-        $areas = ServiceArea::where(['status'=>'active'])->get();
+        $areas = Hub::where(['status'=>'active'])->get();
         return view('admin.pages.driver.create',compact('areas'));
     }
 
@@ -83,7 +84,7 @@ class DriverController extends Controller
     public function edit(string $id)
     {
         $driver = User::with('user_info')->find($id);
-        $areas = ServiceArea::where(['status'=>'active'])->get();
+        $areas = Hub::where(['status'=>'active'])->get();
         return view('admin.pages.driver.edit',compact('driver','areas'));
     }
 

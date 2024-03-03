@@ -7,86 +7,84 @@ Dashboard
     <div class="row">
         <div class="col-sm-12 flex-column d-flex stretch-card">
             <div class="row">
+
+
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
-                    <div class="card bg-primary">
-                        <div class="card-body text-white">
-                            <h3 class="font-weight-bold mb-3">18,39 (75GB)</h3>
-                            <div class="progress mb-3">
-                                <div class="progress-bar  bg-warning" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="pb-0 mb-0">Bandwidth usage</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 d-flex grid-margin stretch-card">
-                    <div class="card sale-diffrence-border">
+                    <div class="card sale-visit-statistics-border">
                         <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
-                            <h4 class="card-title mb-2">Sales Difference</h4>
-                            <small class="text-muted">APRIL 2019</small>
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ pickup_pending() }}</h2>
+                            <h4 class="card-title mb-2">Pickup Pending</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
                     <div class="card sale-visit-statistics-border">
                         <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$3479</h2>
-                            <h4 class="card-title mb-2">Visit Statistics</h4>
-                            <small class="text-muted">APRIL 2019</small>
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ assign_driver() }}</h2>
+                            <h4 class="card-title mb-2">Assign Driver</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
                     <div class="card sale-visit-statistics-border">
                         <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$3479</h2>
-                            <h4 class="card-title mb-2">Visit Statistics</h4>
-                            <small class="text-muted">APRIL 2019</small>
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ received_pickup_pending() }}</h2>
+                            <h4 class="card-title mb-2">Pickup Received</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
                     <div class="card sale-visit-statistics-border">
                         <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$3479</h2>
-                            <h4 class="card-title mb-2">Visit Statistics</h4>
-                            <small class="text-muted">APRIL 2019</small>
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ delivery_hub() }}</h2>
+                            <h4 class="card-title mb-2">Hub Store</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
-                    <div class="card bg-primary">
-                        <div class="card-body text-white">
-                            <h3 class="font-weight-bold mb-3">18,39 (75GB)</h3>
-                            <div class="progress mb-3">
-                                <div class="progress-bar  bg-warning" role="progressbar" style="width: 40%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="pb-0 mb-0">Bandwidth usage</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 d-flex grid-margin stretch-card">
-                    <div class="card sale-diffrence-border">
+                    <div class="card sale-visit-statistics-border">
                         <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
-                            <h4 class="card-title mb-2">Sales Difference</h4>
-                            <small class="text-muted">APRIL 2019</small>
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ transit() }}</h2>
+                            <h4 class="card-title mb-2">Transit</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex grid-margin stretch-card">
-                    <div class="card sale-diffrence-border">
+                    <div class="card sale-visit-statistics-border">
                         <div class="card-body">
-                            <h2 class="text-dark mb-2 font-weight-bold">$6475</h2>
-                            <h4 class="card-title mb-2">Sales Difference</h4>
-                            <small class="text-muted">APRIL 2019</small>
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ delivery() }}</h2>
+                            <h4 class="card-title mb-2">Delivered</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex grid-margin stretch-card">
+                    <div class="card sale-visit-statistics-border">
+                        <div class="card-body">
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ return_percel() }}</h2>
+                            <h4 class="card-title mb-2">Return</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex grid-margin stretch-card">
+                    <div class="card sale-visit-statistics-border">
+                        <div class="card-body">
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ total_agency() }}</h2>
+                            <h4 class="card-title mb-2">Total Agency</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex grid-margin stretch-card">
+                    <div class="card sale-visit-statistics-border">
+                        <div class="card-body">
+                            <h2 class="text-dark mb-2 font-weight-bold">{{ total_driver() }}</h2>
+                            <h4 class="card-title mb-2">Total Driver</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-sm-6 grid-margin grid-margin-md-0 stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -124,6 +122,6 @@ Dashboard
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection
