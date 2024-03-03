@@ -43,7 +43,7 @@
       <div class="container">
           <ul class="nav page-navigation">
             <li class="nav-item">
-              <a class="nav-link text-warning" href="">
+              <a class="nav-link text-warning" href="{{ route('admin.dashboard') }}">
                 <i class="mdi mdi-file-document-box menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
