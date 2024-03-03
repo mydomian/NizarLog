@@ -53,4 +53,13 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
   </script>
+
+
+
+
+
+<script>window.gtranslateSettings = {"default_language":"en","languages":["en","ar"],"wrapper_selector":".gtranslate_wrapper"}</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+
 @stack('admin-scripts')
+

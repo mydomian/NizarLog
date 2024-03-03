@@ -8,6 +8,7 @@ use App\Services\Services;
 use App\Models\ServiceArea;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Hub;
 use Illuminate\Support\Facades\Hash;
 
 class AgencyController extends Controller
@@ -31,7 +32,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        $areas = ServiceArea::where(['status'=>'active'])->get();
+        $areas = Hub::where(['status'=>'active'])->get();
         return view('admin.pages.agency.create',compact('areas'));
     }
 
@@ -82,7 +83,7 @@ class AgencyController extends Controller
     public function edit(string $id)
     {
         $agency = User::with('user_info')->find($id);
-        $areas = ServiceArea::where(['status'=>'active'])->get();
+        $areas = Hub::where(['status'=>'active'])->get();
         return view('admin.pages.agency.edit',compact('agency','areas'));
     }
 
