@@ -8,6 +8,7 @@
               <a class="navbar-brand brand-logo-mini" href=""><img style="width:64px;height:64px;" src="{{ asset('/storage') }}/{{settings()->logo}}" alt="logo"/></a>
           </div>
           <ul class="navbar-nav navbar-nav-right">
+            <div class="gtranslate_wrapper"></div>
               {{-- <li class="nav-item dropdown  d-lg-flex d-none">
                 <button type="button" class="btn btn-inverse-primary btn-sm">Air Bill</button>
               </li>
